@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nwsdb.Docs", "Docs\Nwsdb.Do
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nwsdb.Web.Api.Tests.Unit", "Core\Tests\Nwsdb.Web.Api.Tests.Unit\Nwsdb.Web.Api.Tests.Unit.csproj", "{7D83DFC5-6E85-4396-9622-CCEF015DA47C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{437E8C80-DA69-4966-90DA-8185C8AA88FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{E474BAF5-C989-4291-9FE6-0237B9B50737}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +34,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2D7EB9BF-D96F-4EAA-9964-B4EA7BF342E0} = {437E8C80-DA69-4966-90DA-8185C8AA88FE}
+		{10FA55F1-5135-4A66-897B-80B79826D203} = {E474BAF5-C989-4291-9FE6-0237B9B50737}
+		{7D83DFC5-6E85-4396-9622-CCEF015DA47C} = {437E8C80-DA69-4966-90DA-8185C8AA88FE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D225F8FF-BB7F-4F2F-9356-B18EF1675B65}
