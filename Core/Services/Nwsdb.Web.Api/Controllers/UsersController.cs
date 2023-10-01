@@ -47,5 +47,71 @@ namespace Nwsdb.Web.Api.Controllers
                 return InternalServerError(userServiceException);
             }
         }
+
+        [HttpGet("{id}")]
+        public async ValueTask<ActionResult<User>> GetLandById(Guid id)
+        {
+            try
+            {
+                var retrivedUser = await this.userService.RetrieveUserById(id);
+                return Ok(retrivedUser);
+            }
+            catch (UserValidationException userValidationException)
+                when (userValidationException.InnerException is NotFoundUserException)
+            {
+                return NotFound(userValidationException.InnerException);
+            }
+            catch (UserValidationException userValidationException)
+            {
+                return NotFound(userValidationException.InnerException);
+            }
+            catch (UserDependencyException userDependencyException)
+            {
+                return InternalServerError(userDependencyException);
+            }
+        }
+
+        [HttpGet]
+        public async ValueTask<ActionResult<IQueryable<User>>> GetAllUsers()
+        {
+            try
+            {
+                IQueryable<User> storageUsers =
+                    this.userService.RetrieveAllUsers();
+                return Ok(storageUsers);
+            }
+            catch (UserDependencyException userDependencyException)
+            {
+                return InternalServerError(userDependencyException);
+            }
+            catch (UserServiceException userServiceException)
+            {
+                return InternalServerError(userServiceException);
+            }
+        }
+
+        [HttpPut]
+        public async ValueTask<ActionResult<User>> PutUserAsync(User user)
+        {
+            try
+            {
+                User modifiedUser =
+                    await this.userService.ModifyUserAsync(user);
+                return Ok(modifiedUser);
+            }
+            catch (UserValidationException userValidationException)
+                when (userValidationException.InnerException is NotFoundUserException)
+            {
+                return NotFound(userValidationException.InnerException);
+            }
+            catch (UserValidationException userValidationException)
+            {
+                return BadRequest(userValidationException.InnerException);
+            }
+            catch (UserServiceException userServiceException)
+            {
+                return InternalServerError(userServiceException);
+            }
+        }
     }
 }

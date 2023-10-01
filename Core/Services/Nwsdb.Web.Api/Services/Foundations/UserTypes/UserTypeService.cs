@@ -12,7 +12,7 @@ using Nwsdb.Web.Api.Models.UserTypes;
 
 namespace Nwsdb.Web.Api.Services.Foundations.UserTypes
 {
-    public partial class UserTypeService
+    public partial class UserTypeService : IUserTypeService
     {
         private readonly IStorageBroker storageBroker;
         private readonly ILoggingBroker loggingBroker;

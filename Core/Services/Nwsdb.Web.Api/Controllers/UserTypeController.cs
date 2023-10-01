@@ -7,10 +7,7 @@
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Nwsdb.Web.Api.Models.Users.Exceptions;
-using Nwsdb.Web.Api.Models.Users;
 using RESTFulSense.Controllers;
-using Nwsdb.Web.Api.Services.Foundations.Users;
 using Nwsdb.Web.Api.Services.Foundations.UserTypes;
 using Nwsdb.Web.Api.Models.UserTypes;
 using Nwsdb.Web.Api.Models.UserTypes.Exceptions;
@@ -45,6 +42,72 @@ namespace Nwsdb.Web.Api.Controllers
             catch (UserTypeDependencyException userTypeDependencyException)
             {
                 return InternalServerError(userTypeDependencyException);
+            }
+            catch (UserTypeServiceException userTypeServiceException)
+            {
+                return InternalServerError(userTypeServiceException);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async ValueTask<ActionResult<UserType>> GetLandById(Guid id)
+        {
+            try
+            {
+                var retrivedUserType = await this.userTypeService.RetrieveUserTypeById(id);
+                return Ok(retrivedUserType);
+            }
+            catch (UserTypeValidationException userTypeValidationException)
+                when (userTypeValidationException.InnerException is NotFoundUserTypeException)
+            {
+                return NotFound(userTypeValidationException.InnerException);
+            }
+            catch (UserTypeValidationException userTypeValidationException)
+            {
+                return NotFound(userTypeValidationException.InnerException);
+            }
+            catch (UserTypeDependencyException userTypeDependencyException)
+            {
+                return InternalServerError(userTypeDependencyException);
+            }
+        }
+
+        [HttpGet]
+        public async ValueTask<ActionResult<IQueryable<UserType>>> GetAllUsers()
+        {
+            try
+            {
+                IQueryable<UserType> storageUserTypes =
+                    this.userTypeService.RetrieveAllUserTypes();
+                return Ok(storageUserTypes);
+            }
+            catch (UserTypeDependencyException userTypeDependencyException)
+            {
+                return InternalServerError(userTypeDependencyException);
+            }
+            catch (UserTypeServiceException userTypeServiceException)
+            {
+                return InternalServerError(userTypeServiceException);
+            }
+        }
+
+        [HttpPut]
+        public async ValueTask<ActionResult<UserType>> PutUserTypeAsync(UserType userType)
+        {
+            try
+            {
+                UserType modifiedUserType =
+                    await this.userTypeService.ModifyUserTypeAsync(userType);
+                return Ok(modifiedUserType);
+            }
+            catch (UserTypeValidationException userTypeValidationException)
+                when (userTypeValidationException.InnerException is NotFoundUserTypeException)
+            {
+                return NotFound(userTypeValidationException.InnerException);
+            }
+            catch (UserTypeValidationException userTypeValidationException)
+            {
+                return BadRequest(userTypeValidationException.InnerException);
             }
             catch (UserTypeServiceException userTypeServiceException)
             {

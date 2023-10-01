@@ -32,6 +32,8 @@ namespace Nwsdb.Web.Api.Brokers.Storages
 
             var connectionString = $"Host={connectionHost}:{connectionPort};Database={connectionDatabase}" +
                 $";Username={connectionUsername};Password='{connectionPassword}'";
+
+            optionsBuilder.UseNpgsql(connectionString);
         }
 
         private async ValueTask<T> InsertAsync<T>(T @object)

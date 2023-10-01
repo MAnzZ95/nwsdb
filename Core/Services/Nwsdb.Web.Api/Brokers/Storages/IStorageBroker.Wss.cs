@@ -5,15 +5,15 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
-using Nwsdb.Web.Api.Models.Lands;
+using Nwsdb.Web.Api.Models.WSSs;
 
-namespace Nwsdb.Web.Api.Services.Foundations.Lands
+namespace Nwsdb.Web.Api.Brokers.Storages
 {
-    public interface ILandService
+    public partial interface IStorageBroker
     {
-        ValueTask<Land> AddLandAsync(Land land);
-        IQueryable<Land> RetrieveAllLands();
-        ValueTask<Land> RetrieveLandById(Guid id);
-        ValueTask<Land> ModifyLandAsync(Land land);
+        ValueTask<Wss> InsertWssAsync(Wss wss);
+        IQueryable<Wss> SelectAllWsses();
+        ValueTask<Wss> UpdateWssAsync(Wss wss);
+        ValueTask<Wss> SelectWssById(Guid id);
     }
 }

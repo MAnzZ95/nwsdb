@@ -5,15 +5,13 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
-using Nwsdb.Web.Api.Models.Lands;
+using Xeptions;
 
-namespace Nwsdb.Web.Api.Services.Foundations.Lands
+namespace Nwsdb.Web.Api.Models.WSSs.Exceptions
 {
-    public interface ILandService
+    public class WssValidationException : Xeption
     {
-        ValueTask<Land> AddLandAsync(Land land);
-        IQueryable<Land> RetrieveAllLands();
-        ValueTask<Land> RetrieveLandById(Guid id);
-        ValueTask<Land> ModifyLandAsync(Land land);
+        public WssValidationException(Xeption innerException)
+            : base(message: "Wss validation error occured, please try again", innerException) { }
     }
 }
