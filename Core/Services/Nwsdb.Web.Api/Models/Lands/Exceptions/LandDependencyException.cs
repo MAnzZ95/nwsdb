@@ -5,15 +5,13 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
-using Nwsdb.Web.Api.Models.Lands;
+using Xeptions;
 
-namespace Nwsdb.Web.Api.Services.Foundations.Lands
+namespace Nwsdb.Web.Api.Models.Lands.Exceptions
 {
-    public interface ILandService
+    public class LandDependencyException : Xeption
     {
-        ValueTask<Land> AddLandAsync(Land land);
-        IQueryable<Land> RetrieveAllLands();
-        ValueTask<Land> RetrieveLandById(Guid id);
-        ValueTask<Land> ModifyLandAsync(Land land);
+        public LandDependencyException(Exception innerException)
+            : base(message: "Land dependency error occurred, contact support", innerException) { }
     }
 }

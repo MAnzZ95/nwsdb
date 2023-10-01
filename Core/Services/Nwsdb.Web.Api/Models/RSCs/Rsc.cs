@@ -5,15 +5,19 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
-using Nwsdb.Web.Api.Models.Lands;
-
-namespace Nwsdb.Web.Api.Services.Foundations.Lands
+namespace Nwsdb.Web.Api.Models.RSCs
 {
-    public interface ILandService
+    public class Rsc : IAuditable
     {
-        ValueTask<Land> AddLandAsync(Land land);
-        IQueryable<Land> RetrieveAllLands();
-        ValueTask<Land> RetrieveLandById(Guid id);
-        ValueTask<Land> ModifyLandAsync(Land land);
+        public Guid Id { get; set; }
+        public string? RMONumber { get; set; }
+        public string? Name { get; set; }
+        public string? Address { get; set; }
+        public string? Mobile { get; set; }
+        public RscStatus Status { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
+        public DateTimeOffset UpdatedDate { get; set; }
+        public Guid CreatedBy { get; set; }
+        public Guid UpdatedBy { get; set; }
     }
 }

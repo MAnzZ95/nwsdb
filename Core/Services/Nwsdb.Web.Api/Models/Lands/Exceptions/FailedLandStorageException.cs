@@ -5,15 +5,13 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
-using Nwsdb.Web.Api.Models.Lands;
+using Xeptions;
 
-namespace Nwsdb.Web.Api.Services.Foundations.Lands
+namespace Nwsdb.Web.Api.Models.Lands.Exceptions
 {
-    public interface ILandService
+    public class FailedLandStorageException : Xeption
     {
-        ValueTask<Land> AddLandAsync(Land land);
-        IQueryable<Land> RetrieveAllLands();
-        ValueTask<Land> RetrieveLandById(Guid id);
-        ValueTask<Land> ModifyLandAsync(Land land);
+        public FailedLandStorageException(Exception innerException)
+            : base(message: "Failed land storage error occured, try again later.", innerException) { }
     }
 }

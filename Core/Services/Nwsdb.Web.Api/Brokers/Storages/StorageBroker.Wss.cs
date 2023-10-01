@@ -5,15 +5,26 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
-using Nwsdb.Web.Api.Models.UserTypes;
+using Microsoft.EntityFrameworkCore;
+using Nwsdb.Web.Api.Models.Users;
+using Nwsdb.Web.Api.Models.WSSs;
 
 namespace Nwsdb.Web.Api.Brokers.Storages
 {
-    public partial interface IStorageBroker
+    public partial class StorageBroker
     {
-        ValueTask<UserType> InserUserTypeAsync(UserType userType);
-        IQueryable<UserType> SelectAllUserTypes();
-        ValueTask<UserType> UpdateUserTypeAsync(UserType user);
-        ValueTask<UserType> SelectUserTypeById(Guid id);
+        public DbSet<Wss> Wsses { get; set; }
+
+        public async ValueTask<Wss> InsertWssAsync(Wss wss) =>
+            await InsertAsync(wss);
+
+        public IQueryable<Wss> SelectAllWsses() =>
+            this.Wsses;
+
+        public async ValueTask<Wss> UpdateWssAsync(Wss wss) =>
+            await UpdateAsync(wss);
+
+        public async ValueTask<Wss> SelectWssById(Guid id) =>
+            await SelectAsync<Wss>(id);
     }
 }

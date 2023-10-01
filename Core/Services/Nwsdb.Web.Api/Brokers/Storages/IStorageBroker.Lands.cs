@@ -7,13 +7,13 @@
 
 using Nwsdb.Web.Api.Models.Lands;
 
-namespace Nwsdb.Web.Api.Services.Foundations.Lands
+namespace Nwsdb.Web.Api.Brokers.Storages
 {
-    public interface ILandService
+    public partial interface IStorageBroker
     {
-        ValueTask<Land> AddLandAsync(Land land);
-        IQueryable<Land> RetrieveAllLands();
-        ValueTask<Land> RetrieveLandById(Guid id);
-        ValueTask<Land> ModifyLandAsync(Land land);
+        ValueTask<Land> InserLandAsync(Land land);
+        IQueryable<Land> SelectAllLands();
+        ValueTask<Land> UpdateLandAsync(Land land);
+        ValueTask<Land> SelectLandById(Guid id);
     }
 }

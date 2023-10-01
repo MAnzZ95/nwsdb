@@ -5,6 +5,10 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
+using Nwsdb.Web.Api.Models.RMOs;
+using Nwsdb.Web.Api.Models.RSCs;
+using Nwsdb.Web.Api.Models.WSSs;
+
 namespace Nwsdb.Web.Api.Models.Lands
 {
     public class Land : IAuditable
@@ -17,6 +21,9 @@ namespace Nwsdb.Web.Api.Models.Lands
         public Guid DSDivisionId { get; set; }
         public Guid GSDivisionId { get; set; }
         public Guid SubCategoryId {get; set;}
+        public Guid WssId { get; set; }
+        public Guid RscId { get; set; }
+        public Guid RmoId { get; set; }
         public string? LandName { get; set; }
         public string? Phone { get; set; }
         public string? LandArea { get; set; }
@@ -30,5 +37,8 @@ namespace Nwsdb.Web.Api.Models.Lands
         public Guid CreatedBy { get; set; }
         public Guid UpdatedBy { get; set;}
 
+        public virtual Rmo? Rmo { get; set; }
+        public virtual Wss? WSS { get; set; }
+        public virtual Rsc? RSC { get; set; }
     }
 }
