@@ -5,13 +5,15 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
-using Xeptions;
+using Nwsdb.Web.Api.Models.Provinces;
 
-namespace Nwsdb.Web.Api.Models.Lands.Exceptions
+namespace Nwsdb.Web.Api.Brokers.Storages
 {
-    public class DistrictValidationException : Xeption
+    public partial interface IStorageBroker
     {
-        public DistrictValidationException(Xeption innerException)
-            : base(message: "Land validation error occured, please try again", innerException) { }
+        ValueTask<Province> InserProvinceAsync(Province province);
+        IQueryable<Province> SelectAllProvinces();
+        ValueTask<Province> UpdateProvinceAsync(Province province);
+        ValueTask<Province> SelectProvinceById(Guid id);
     }
 }

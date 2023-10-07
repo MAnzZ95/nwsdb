@@ -5,13 +5,12 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
-using Xeptions;
+using Nwsdb.Web.Api.Models.Provinces;
 
-namespace Nwsdb.Web.Api.Models.Lands.Exceptions
+namespace Nwsdb.Web.Api.Services.Foundations.Provinces
 {
-    public class DistrictValidationException : Xeption
+    public interface IProvinceService
     {
-        public DistrictValidationException(Xeption innerException)
-            : base(message: "Land validation error occured, please try again", innerException) { }
+        IQueryable<Province> RetrieveAllOwnerShips();
     }
 }

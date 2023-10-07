@@ -5,13 +5,10 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
-using Xeptions;
 
-namespace Nwsdb.Web.Api.Models.Lands.Exceptions
+namespace Nwsdb.Web.Api.Controllers
 {
-    public class DistrictValidationException : Xeption
+    internal class DSDividion
     {
-        public DistrictValidationException(Xeption innerException)
-            : base(message: "Land validation error occured, please try again", innerException) { }
     }
 }

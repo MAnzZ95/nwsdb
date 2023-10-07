@@ -7,11 +7,11 @@
 
 using Xeptions;
 
-namespace Nwsdb.Web.Api.Models.Lands.Exceptions
+namespace Nwsdb.Web.Api.Models.OwnerShips.Exceptions
 {
-    public class LandTypeDependencyValidationException : Xeption
+    public class FailedOwnerShipStorageException : Xeption
     {
-        public LandTypeDependencyValidationException(Xeption innerException)
-            : base(message: "Land validation error occured, Please try again.", innerException) { }
+        public FailedOwnerShipStorageException(Exception innerException)
+            : base(message: "Failed owner ship storage error occured, try again later.", innerException) { }
     }
 }

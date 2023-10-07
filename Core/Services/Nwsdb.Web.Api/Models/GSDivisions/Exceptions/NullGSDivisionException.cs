@@ -7,11 +7,10 @@
 
 using Xeptions;
 
-namespace Nwsdb.Web.Api.Models.Lands.Exceptions
+namespace Nwsdb.Web.Api.Models.GSDivisions.Exceptions
 {
-    public class DistrictValidationException : Xeption
+    public class NullGSDivisionException : Xeption
     {
-        public DistrictValidationException(Xeption innerException)
-            : base(message: "Land validation error occured, please try again", innerException) { }
+        public NullGSDivisionException() : base("GSDivision is null") { }
     }
 }

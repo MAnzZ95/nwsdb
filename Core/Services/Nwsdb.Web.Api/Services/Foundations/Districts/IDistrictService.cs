@@ -5,13 +5,12 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
-using Xeptions;
+using Nwsdb.Web.Api.Models.Districts;
 
-namespace Nwsdb.Web.Api.Models.Lands.Exceptions
+namespace Nwsdb.Web.Api.Services.Foundations.Districts
 {
-    public class DistrictValidationException : Xeption
+    public interface IDistrictService
     {
-        public DistrictValidationException(Xeption innerException)
-            : base(message: "Land validation error occured, please try again", innerException) { }
+        IQueryable<District> RetrieveAllDistricts();
     }
 }

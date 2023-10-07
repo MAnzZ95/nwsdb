@@ -7,11 +7,11 @@
 
 using Xeptions;
 
-namespace Nwsdb.Web.Api.Models.Lands.Exceptions
+namespace Nwsdb.Web.Api.Models.OwnerShips.Exceptions
 {
-    public class DistrictValidationException : Xeption
+    public class OwnerShipDependencyException : Xeption
     {
-        public DistrictValidationException(Xeption innerException)
-            : base(message: "Land validation error occured, please try again", innerException) { }
+        public OwnerShipDependencyException(Exception innerException)
+            : base(message: "Owner ship dependency error occurred, contact support", innerException) { }
     }
 }

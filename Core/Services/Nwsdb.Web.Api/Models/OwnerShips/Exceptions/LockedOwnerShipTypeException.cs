@@ -7,11 +7,11 @@
 
 using Xeptions;
 
-namespace Nwsdb.Web.Api.Models.Lands.Exceptions
+namespace Nwsdb.Web.Api.Models.OwnerShips.Exceptions
 {
-    public class DistrictValidationException : Xeption
+    public class LockedOwnerShipTypeException : Xeption
     {
-        public DistrictValidationException(Xeption innerException)
-            : base(message: "Land validation error occured, please try again", innerException) { }
+        public LockedOwnerShipTypeException(Xeption innerException)
+            : base(message: "Locked owner ship record exception, please try again later.", innerException) { }
     }
 }
