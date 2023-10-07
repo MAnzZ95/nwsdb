@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\OwnerShips\Exceptions\" />
     <Folder Include="Services\Orchestration\" />
   </ItemGroup>
 

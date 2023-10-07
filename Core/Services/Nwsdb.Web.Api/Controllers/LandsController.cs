@@ -33,15 +33,15 @@ namespace Nwsdb.Web.Api.Controllers
 
                 return Ok(addedLand);
             }
-            catch (LandValidationException landValidationException)
+            catch (LandHistoryValidationException landValidationException)
             {
                 return BadRequest(landValidationException.InnerException);
             }
-            catch (LandDependencyException landDependencyException)
+            catch (LandHistoryDependencyException landDependencyException)
             {
                 return InternalServerError(landDependencyException);
             }
-            catch (LandServiceException landServiceException)
+            catch (LandHistoryServiceException landServiceException)
             {
                 return InternalServerError(landServiceException);
             }
@@ -55,16 +55,16 @@ namespace Nwsdb.Web.Api.Controllers
                 var retrivedLand = await this.landService.RetrieveLandById(id);
                 return Ok(retrivedLand);
             }
-            catch(LandValidationException landValidationException) 
-                when(landValidationException.InnerException is NotFoundLandException)
+            catch(LandHistoryValidationException landValidationException) 
+                when(landValidationException.InnerException is NotFoundLandHistoryException)
             {
                 return NotFound(landValidationException.InnerException);
             }
-            catch(LandValidationException landValidationException)
+            catch(LandHistoryValidationException landValidationException)
             {
                 return NotFound(landValidationException.InnerException);
             }
-            catch(LandDependencyException landDependencyException)
+            catch(LandHistoryDependencyException landDependencyException)
             {
                 return InternalServerError(landDependencyException);
             }
@@ -79,11 +79,11 @@ namespace Nwsdb.Web.Api.Controllers
                     this.landService.RetrieveAllLands();
                 return Ok(storageLands);
             }
-            catch(LandDependencyException landDependencyException)
+            catch(LandHistoryDependencyException landDependencyException)
             {
                 return InternalServerError(landDependencyException);
             }
-            catch(LandServiceException landServiceException)
+            catch(LandHistoryServiceException landServiceException)
             {
                 return InternalServerError(landServiceException);
             }
@@ -98,16 +98,16 @@ namespace Nwsdb.Web.Api.Controllers
                     await this.landService.ModifyLandAsync(land);
                 return Ok(modifiedLand);
             }
-            catch(LandValidationException companyValidationException)
-                when(companyValidationException.InnerException is NotFoundLandException)
+            catch(LandHistoryValidationException companyValidationException)
+                when(companyValidationException.InnerException is NotFoundLandHistoryException)
             {
                 return NotFound(companyValidationException.InnerException);
             }
-            catch(LandValidationException companyValidationException)
+            catch(LandHistoryValidationException companyValidationException)
             {
                 return BadRequest(companyValidationException.InnerException);
             }
-            catch(LandServiceException landServiceException)
+            catch(LandHistoryServiceException landServiceException)
             {
                 return InternalServerError(landServiceException);
             }

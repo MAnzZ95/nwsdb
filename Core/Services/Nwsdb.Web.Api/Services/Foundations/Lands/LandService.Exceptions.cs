@@ -43,15 +43,15 @@ namespace Nwsdb.Web.Api.Services.Foundations.Lands
             {
                 return await returningLandFunction();
             }
-            catch (NullLandException nullLandException)
+            catch (NullLandHistoryException nullLandException)
             {
                 throw CreateAndLogValidationException(nullLandException);
             }
-            catch (InvalidLandException invalidLandException)
+            catch (InvalidLandHistoryException invalidLandException)
             {
                 throw CreateAndLogValidationException(invalidLandException);
             }
-            catch (NotFoundLandException notFoundLandException)
+            catch (NotFoundLandHistoryException notFoundLandException)
             {
                 throw CreateAndLogValidationException(notFoundLandException);
             }
@@ -69,7 +69,7 @@ namespace Nwsdb.Web.Api.Services.Foundations.Lands
             }
         }
 
-        private LandDependencyException CreateAndLogCriticalDependencyException(Xeption exception)
+        private LandHistoryDependencyException CreateAndLogCriticalDependencyException(Xeption exception)
         {
             var landDependencyException = new LandDependencyException(exception);
             this.loggingBroker.LogCritical(landDependencyException);
@@ -77,14 +77,14 @@ namespace Nwsdb.Web.Api.Services.Foundations.Lands
             throw landDependencyException;
         }
 
-        private LandDependencyException CreateAndLogDependencyException(Xeption exception)
+        private LandHistoryDependencyException CreateAndLogDependencyException(Xeption exception)
         {
             var landDependencyException = new LandDependencyException(exception);
             this.loggingBroker.LogError(landDependencyException);
 
             throw landDependencyException;
         }
-        private LandServiceException CreateAndLogServiceException(Xeption exception)
+        private LandHistoryServiceException CreateAndLogServiceException(Xeption exception)
         {
             var landServiceException = new LandServiceException(exception);
             this.loggingBroker.LogError(landServiceException);
@@ -92,7 +92,7 @@ namespace Nwsdb.Web.Api.Services.Foundations.Lands
             throw landServiceException;
         }
 
-        private LandValidationException CreateAndLogValidationException(Xeption exception)
+        private LandHistoryValidationException CreateAndLogValidationException(Xeption exception)
         {
             var landValidationException = new LandValidationException(exception);
             this.loggingBroker.LogError(landValidationException);
@@ -100,7 +100,7 @@ namespace Nwsdb.Web.Api.Services.Foundations.Lands
             throw landValidationException;
         }
 
-        private LandDependencyValidationException CreateAndLogDependencyValidationException(Xeption exception)
+        private LandTypeDependencyValidationException CreateAndLogDependencyValidationException(Xeption exception)
         {
             var landDependencyValidationException = new LandDependencyValidationException(exception);
             this.loggingBroker.LogError(landDependencyValidationException);
