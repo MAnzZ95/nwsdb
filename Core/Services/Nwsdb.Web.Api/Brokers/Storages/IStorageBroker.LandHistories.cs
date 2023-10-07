@@ -5,12 +5,15 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
-namespace Nwsdb.Web.Api.Models.DSDevisions
-{
-    public class DSDivisions
-    {
-        public Guid Id { get; set; }
+using Nwsdb.Web.Api.Models.LandHistories;
 
-        public string? Name { get; set; }
+namespace Nwsdb.Web.Api.Brokers.Storages
+{
+    public partial interface IStorageBroker
+    {
+        ValueTask<LandHistory> InserLandHistoryAsync(LandHistory landHistories);
+        IQueryable<LandHistory> SelectAllLandHistoryHistories();
+        ValueTask<LandHistory> UpdateLandHistoryAsync(LandHistory landHistories);
+        ValueTask<LandHistory> SelectLandHistoryById(Guid id);
     }
 }

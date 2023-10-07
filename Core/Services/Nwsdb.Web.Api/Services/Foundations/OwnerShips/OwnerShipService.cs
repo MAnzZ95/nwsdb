@@ -8,18 +8,18 @@
 using Nwsdb.Web.Api.Brokers.DateTimes;
 using Nwsdb.Web.Api.Brokers.Loggings;
 using Nwsdb.Web.Api.Brokers.Storages;
-using Nwsdb.Web.Api.Models.RSCs;
-using Nwsdb.Web.Api.Models.WSSs;
+using Nwsdb.Web.Api.Models.LandTypes;
+using Nwsdb.Web.Api.Models.OwnerShips;
 
-namespace Nwsdb.Web.Api.Services.Foundations.Wsses
+namespace Nwsdb.Web.Api.Services.Foundations.OwnerShips
 {
-    public partial class WssService : IWssService
+    public partial class OwnerShipService : IOwnerShipService
     {
         private readonly IStorageBroker storageBroker;
         private readonly ILoggingBroker loggingBroker;
         private readonly IDateTimeBroker dateTimeBroker;
 
-        public WssService(
+        public OwnerShipService(
             IStorageBroker storageBroker,
             ILoggingBroker loggingBroker,
             IDateTimeBroker dateTimeBroker)
@@ -29,8 +29,8 @@ namespace Nwsdb.Web.Api.Services.Foundations.Wsses
             this.dateTimeBroker = dateTimeBroker;
         }
 
-        public IQueryable<Wss> RetrieveAllWsses() =>
+        public IQueryable<OwnerShip> RetrieveAllOwnerShips() =>
             TryCatch(() =>
-                this.storageBroker.SelectAllWsses());
+                this.storageBroker.SelectAllOwnerShips());
     }
 }

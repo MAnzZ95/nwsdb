@@ -7,11 +7,11 @@
 
 using Xeptions;
 
-namespace Nwsdb.Web.Api.Models.Lands.Exceptions
+namespace Nwsdb.Web.Api.Models.LandHistories.Exceptions
 {
-    public class DistrictValidationException : Xeption
+    public class LandHistoryDependencyValidationException : Xeption
     {
-        public DistrictValidationException(Xeption innerException)
-            : base(message: "Land validation error occured, please try again", innerException) { }
+        public LandHistoryDependencyValidationException(Xeption innerException)
+            : base(message: "Land history validation error occured, Please try again.", innerException) { }
     }
 }

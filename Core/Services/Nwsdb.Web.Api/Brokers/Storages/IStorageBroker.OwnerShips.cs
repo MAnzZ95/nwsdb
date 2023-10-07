@@ -5,13 +5,15 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
-using Xeptions;
+using Nwsdb.Web.Api.Models.OwnerShips;
 
-namespace Nwsdb.Web.Api.Models.Lands.Exceptions
+namespace Nwsdb.Web.Api.Brokers.Storages
 {
-    public class DistrictValidationException : Xeption
+    public partial interface IStorageBroker
     {
-        public DistrictValidationException(Xeption innerException)
-            : base(message: "Land validation error occured, please try again", innerException) { }
+        ValueTask<OwnerShip> InsertOwnerShipAsync(OwnerShip ownerShip);
+        IQueryable<OwnerShip> SelectAllOwnerShips();
+        ValueTask<OwnerShip> UpdateOwnerShipAsync(OwnerShip ownerShip);
+        ValueTask<OwnerShip> SelectOwnerShipById(Guid id);
     }
 }

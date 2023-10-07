@@ -8,18 +8,18 @@
 using Nwsdb.Web.Api.Brokers.DateTimes;
 using Nwsdb.Web.Api.Brokers.Loggings;
 using Nwsdb.Web.Api.Brokers.Storages;
+using Nwsdb.Web.Api.Models.RMOs;
 using Nwsdb.Web.Api.Models.RSCs;
-using Nwsdb.Web.Api.Models.WSSs;
 
-namespace Nwsdb.Web.Api.Services.Foundations.Wsses
+namespace Nwsdb.Web.Api.Services.Foundations.RSCs
 {
-    public partial class WssService : IWssService
+    public partial class RscService
     {
         private readonly IStorageBroker storageBroker;
         private readonly ILoggingBroker loggingBroker;
         private readonly IDateTimeBroker dateTimeBroker;
 
-        public WssService(
+        public RscService(
             IStorageBroker storageBroker,
             ILoggingBroker loggingBroker,
             IDateTimeBroker dateTimeBroker)
@@ -29,8 +29,8 @@ namespace Nwsdb.Web.Api.Services.Foundations.Wsses
             this.dateTimeBroker = dateTimeBroker;
         }
 
-        public IQueryable<Wss> RetrieveAllWsses() =>
+        public IQueryable<Rsc> RetrieveAllRscs() =>
             TryCatch(() =>
-                this.storageBroker.SelectAllWsses());
+                this.storageBroker.SelectAllRscs());
     }
 }
