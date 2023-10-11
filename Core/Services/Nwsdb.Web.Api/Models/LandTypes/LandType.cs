@@ -4,6 +4,7 @@
 // NWSDB and may not be disclosed, examined or reproduced in whole or in part without
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------
 
 namespace Nwsdb.Web.Api.Models.LandTypes
 {
