@@ -11,6 +11,6 @@ namespace Nwsdb.Web.Api.Services.Foundations.LandTypes
 {
     public interface ILandTypeService
     {
-        IQueryable<LandType> RetrieveAllLands()
+        IQueryable<LandType> RetrieveAllLands();
     }
 }
