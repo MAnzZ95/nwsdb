@@ -30,7 +30,7 @@ namespace Nwsdb.Web.Api.Services.Foundations.LandTypes
             this.dateTimeBroker = dateTimeBroker;
         }
 
-        public IQueryable<LandType> RetrieveAllLands() =>
+        public IQueryable<LandType> RetrieveAllLandTypes() =>
             TryCatch(() =>
                 this.storageBroker.SelectAllLandTypes());
     }
