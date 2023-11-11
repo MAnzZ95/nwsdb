@@ -10,6 +10,7 @@ using Nwsdb.Web.Api.Brokers.Loggings;
 using Nwsdb.Web.Api.Brokers.Storages;
 using Nwsdb.Web.Api.Models.Lands;
 using Nwsdb.Web.Api.Models.LandTypes;
+using Nwsdb.Web.Api.Models.Users;
 
 namespace Nwsdb.Web.Api.Services.Foundations.LandTypes
 {
@@ -33,5 +34,29 @@ namespace Nwsdb.Web.Api.Services.Foundations.LandTypes
         public IQueryable<LandType> RetrieveAllLandTypes() =>
             TryCatch(() =>
                 this.storageBroker.SelectAllLandTypes());
+
+        public ValueTask<LandType> AddLandTypeAsync(LandType landType) =>
+           TryCatch(async () =>
+           {
+               ValidateLandTypeOnAdd(landType);
+
+               return await this.storageBroker.InserLandTypeAsync(landType);
+           });
+
+        public ValueTask<LandType> RetrieveLandTypeById(Guid id) =>
+            TryCatch(async () =>
+            {
+                ValidateLandTypeId(id);
+
+                return await this.storageBroker.SelectLandTypeById(id);
+            });
+
+        public ValueTask<LandType> ModifyLandTypeAsync(LandType landType) =>
+            TryCatch(async () =>
+            {
+                ValidateLandTypeOnAdd(landType);
+
+                return await this.storageBroker.UpdateLandTypeAsync(landType);
+            });
     }
 }

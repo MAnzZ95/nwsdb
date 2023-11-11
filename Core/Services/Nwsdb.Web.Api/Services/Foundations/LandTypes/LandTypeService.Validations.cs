@@ -7,17 +7,14 @@ namespace Nwsdb.Web.Api.Services.Foundations.LandTypes
 {
     public partial class LandTypeService
     {
-        //private void ValidateLandTypeOnAdd(LandType landType)
-        //{
-        //    ValidateUserIsNotNull(user);
-        //    Validate(
-        //        (Rule: IsInvalid(user.Id), Parameter: nameof(User.Id)),
-        //        (Rule: IsInvalid(user.Name), Parameter: nameof(User.Name)),
-        //        (Rule: IsInvalid(user.Email), Parameter: nameof(User.Email)),
-        //        (Rule: IsInvalid(user.Mobile), Parameter: nameof(User.Mobile)),
-        //        (Rule: IsInvalid(user.Password), Parameter: nameof(User.Password))
-        //        );
-        //}
+        private void ValidateLandTypeOnAdd(LandType landType)
+        {
+            ValidateLandTypeIsNotNull(landType);
+            Validate(
+                (Rule: IsInvalid(landType.Id), Parameter: nameof(LandType.Id)),
+                (Rule: IsInvalid(landType.Name), Parameter: nameof(LandType.Name))
+                );
+        }
 
         private static dynamic IsInvalid(Guid id) => new
         {
@@ -31,8 +28,8 @@ namespace Nwsdb.Web.Api.Services.Foundations.LandTypes
             Message = "Text is required"
         };
 
-        //private static void ValidateLandTypeId(Guid id) =>
-        //    Validate((Rule: IsInvalid(id), Parameter: nameof(LandType.)));
+        private static void ValidateLandTypeId(Guid id) =>
+            Validate((Rule: IsInvalid(id), Parameter: nameof(LandType.Id)));
 
         private static void ValidateLandTypeIsNotNull(LandType landType)
         {
