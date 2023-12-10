@@ -11,4 +11,8 @@
     <ProjectReference Include="..\..\Core\Services\Nwsdb.Web.Api\Nwsdb.Web.Api.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="API\" />
+  </ItemGroup>
+
 </Project>
