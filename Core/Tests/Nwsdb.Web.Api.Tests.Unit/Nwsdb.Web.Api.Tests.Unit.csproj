@@ -26,10 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Foundations\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Services\Nwsdb.Web.Api\Nwsdb.Web.Api.csproj" />
   </ItemGroup>
 
