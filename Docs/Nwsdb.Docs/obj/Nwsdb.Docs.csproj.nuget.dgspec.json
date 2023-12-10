@@ -49,6 +49,10 @@
               "target": "Package",
               "version": "[6.2.0, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.23, )"
+            },
             "Microsoft.Data.OData": {
               "target": "Package",
               "version": "[5.8.5, )"
@@ -82,6 +86,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[7.0.2, )"
             },
             "Xeption": {
               "target": "Package",

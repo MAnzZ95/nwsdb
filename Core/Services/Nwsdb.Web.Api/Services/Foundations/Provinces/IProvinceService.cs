@@ -11,6 +11,6 @@ namespace Nwsdb.Web.Api.Services.Foundations.Provinces
 {
     public interface IProvinceService
     {
-        IQueryable<Province> RetrieveAllOwnerShips();
+        IQueryable<Province> RetrieveAllProvinces();
     }
 }

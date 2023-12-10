@@ -5,10 +5,15 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Nwsdb.Web.Api.Controllers
+namespace Nwsdb.Web.Api.Tests.Unit.Services.Foundations.Districts
 {
-    internal class DSDividion
+    public partial class DistrictServiceTests
     {
     }
 }

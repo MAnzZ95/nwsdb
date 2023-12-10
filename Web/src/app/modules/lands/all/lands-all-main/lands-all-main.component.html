@@ -1,0 +1,96 @@
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Lands All</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Lands All</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3 mt-3">
+                <a [routerLink]="['/lands-all-main']" class="btn btn-primary">Add New</a>
+             
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-4">
+                  <select id="inputState" class="form-select">
+                    <option selected>RSC</option>
+                    <option>...</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <select id="inputState" class="form-select">
+                    <option selected>RMO</option>
+                    <option>...</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <select id="inputState" class="form-select">
+                    <option selected>WSS</option>
+                    <option>...</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Table with stripped rows -->
+              <table class="table datatable">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Type 1</td>
+                    <td>Brandon Jacob</td>
+                    <td>
+                      <a href="lands-all-view.html" class="btn btn-primary btn-sm" title="View"><i class="bi bi-eye"></i></a>
+                      <a href="#" class="btn btn-success btn-sm" title="Edit"><i class="bi bi-pen"></i></a>
+                      <a href="#" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Type 2</td>
+                    <td>Bridie Kessler</td>
+                    <td>
+                      <a href="lands-all-view.html" class="btn btn-primary btn-sm" title="View"><i class="bi bi-eye"></i></a>
+                      <a href="#" class="btn btn-success btn-sm" title="Edit"><i class="bi bi-pen"></i></a>
+                      <a href="#" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Type 3</td>
+                    <td>Ashleigh Langosh</td>
+                    <td>
+                      <a href="lands-all-view.html" class="btn btn-primary btn-sm" title="View"><i class="bi bi-eye"></i></a>
+                      <a href="#" class="btn btn-success btn-sm" title="Edit"><i class="bi bi-pen"></i></a>
+                      <a href="#" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->

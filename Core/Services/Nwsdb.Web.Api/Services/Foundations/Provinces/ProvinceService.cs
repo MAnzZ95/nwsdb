@@ -30,7 +30,7 @@ namespace Nwsdb.Web.Api.Services.Foundations.Provinces
             this.dateTimeBroker = dateTimeBroker;
         }
 
-        public IQueryable<Province> RetrieveAllOwnerShips() =>
+        public IQueryable<Province> RetrieveAllProvinces() =>
             TryCatch(() =>
                 this.storageBroker.SelectAllProvinces());
     }

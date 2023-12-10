@@ -36,7 +36,7 @@ namespace Nwsdb.Web.Api.Services.Foundations.LandHistories
                 return await this.storageBroker.InserLandHistoryAsync(landHistory);
             });
 
-        public IQueryable<LandHistory> RetrieveAllLands() =>
+        public IQueryable<LandHistory> RetrieveAllLandHistories() =>
             TryCatch(() =>
                 this.storageBroker.SelectAllLandHistoryHistories());
 
@@ -48,7 +48,7 @@ namespace Nwsdb.Web.Api.Services.Foundations.LandHistories
                 return await this.storageBroker.SelectLandHistoryById(id);
             });
 
-        public ValueTask<LandHistory> ModifyLandAsync(LandHistory land) =>
+        public ValueTask<LandHistory> ModifyLandHistoryAsync(LandHistory land) =>
             TryCatch(async () =>
             {
                 ValidateLandHistoryOnAdd(land);

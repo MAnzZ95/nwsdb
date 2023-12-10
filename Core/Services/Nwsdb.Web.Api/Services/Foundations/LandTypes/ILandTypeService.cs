@@ -11,6 +11,9 @@ namespace Nwsdb.Web.Api.Services.Foundations.LandTypes
 {
     public interface ILandTypeService
     {
-        IQueryable<LandType> RetrieveAllLands();
+        IQueryable<LandType> RetrieveAllLandTypes();
+        ValueTask<LandType> AddLandTypeAsync(LandType landType);
+        ValueTask<LandType> RetrieveLandTypeById(Guid id);
+        ValueTask<LandType> ModifyLandTypeAsync(LandType landType);
     }
 }
