@@ -97,7 +97,7 @@ namespace Nwsdb.Web.Api.Controllers
         {
             try
             {
-                LandType modifiedLandType =s
+                LandType modifiedLandType =
                     await this.landTypeService.ModifyLandTypeAsync(userType);
                 return Ok(modifiedLandType);
             }
