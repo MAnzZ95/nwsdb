@@ -5,11 +5,16 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
+using Nwsdb.Web.Api.Models.Districts;
+
 namespace Nwsdb.Web.Api.Models.Provinces
 {
     public class Province
     {
         public Guid Id { get; set; }
+        public int PCode { get; set; }
         public string? Name { get; set; }
+
+        public ICollection<District> Districts { get; set; }
     }
 }
