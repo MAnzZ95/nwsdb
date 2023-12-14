@@ -1,29 +1,44 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { NavMenuComponent } from './modules/shared/nav-menu/nav-menu.component';
-import { LandsAllMainComponent } from './modules/lands/all/lands-all-main/lands-all-main.component';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { SpinnerComponent } from './shared/spinner.componen';
+import { FullComponent } from './layout/full/full.component';
+import { AppHeaderComponent } from './layout/full/header/header.component';
+import { DemoMaterialModule } from './demo-material-module';
+import { SharedModule } from './shared/shared.module';
+import { AppSidebarComponent } from './layout/full/sidebar/sidebar.component';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutes } from './app.routing';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavMenuComponent,
-    LandsAllMainComponent
-  ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
-    RouterModule,
-    FormsModule,
-    AppRoutingModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
-  exports: [RouterModule]
+    declarations: [
+        AppComponent,
+        SpinnerComponent,
+        FullComponent,
+        AppHeaderComponent
+    ],
+    providers: [{
+        provide: LocationStrategy,
+        useClass: PathLocationStrategy
+        }],
+    bootstrap: [AppComponent],
+    exports: [RouterModule],
+    imports: [
+        HttpClientModule,
+        RouterModule,
+        AppRoutingModule,
+        NoopAnimationsModule,
+        DemoMaterialModule,
+        SharedModule,
+        AppSidebarComponent,
+        RouterModule.forRoot(AppRoutes),
+        BrowserModule,
+        BrowserAnimationsModule,
+    ]
 })
 export class AppModule { }
