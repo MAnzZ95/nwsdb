@@ -1,6 +1,7 @@
 using Nwsdb.Web.Api.Brokers.DateTimes;
 using Nwsdb.Web.Api.Brokers.Loggings;
 using Nwsdb.Web.Api.Brokers.Storages;
+using Nwsdb.Web.Api.Services.Foundations.Districts;
 using Nwsdb.Web.Api.Services.Foundations.Lands;
 using Nwsdb.Web.Api.Services.Foundations.Users;
 using Nwsdb.Web.Api.Services.Foundations.UserTypes;
@@ -17,6 +18,7 @@ builder.Services.AddTransient<IDateTimeBroker, DateTimeBroker>();
 builder.Services.AddTransient<IUserTypeService, UserTypeService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ILandService, LandService>();
+builder.Services.AddTransient<IDistrictService, DistrictService>();
 
 
 // Add services to the container.
