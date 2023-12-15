@@ -1,6 +1,6 @@
 
-import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +14,8 @@ import { AppSidebarComponent } from './layout/full/sidebar/sidebar.component';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutes } from './app.routing';
+import { AppConfigService } from './app-config.service';
+import { initializeKeycloak } from './core/utils/app.init';
 
 @NgModule({
     declarations: [
@@ -22,10 +24,19 @@ import { AppRoutes } from './app.routing';
         FullComponent,
         AppHeaderComponent
     ],
-    providers: [{
-        provide: LocationStrategy,
-        useClass: PathLocationStrategy
-        }],
+    providers: [
+        AppConfigService,
+        {
+            provide: LocationStrategy,
+            useClass: PathLocationStrategy
+        },
+        {
+            provide: APP_INITIALIZER,
+            useFactory:initializeKeycloak,
+            multi:true,
+            deps:[HttpClient,AppConfigService]
+        }
+    ],
     bootstrap: [AppComponent],
     exports: [RouterModule],
     imports: [

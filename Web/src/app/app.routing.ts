@@ -1,5 +1,6 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { FullComponent } from './layout/full/full.component';
+import { NgModule } from '@angular/core';
 
 export const AppRoutes: Routes = [
   {
@@ -12,9 +13,9 @@ export const AppRoutes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: '',
+        path: 'land',
         loadChildren:
-          () => import('./material-component/material.module').then(m => m.MaterialComponentsModule)
+          () => import('./modules/land/land.module').then(m => m.LandModule)
       },
       {
         path: 'dashboard',
@@ -23,3 +24,10 @@ export const AppRoutes: Routes = [
     ]
   }
 ];
+
+@NgModule({
+  imports:[RouterModule.forRoot(AppRoutes)],
+  exports: [RouterModule],
+})
+
+export class AppRoutingModule{}
