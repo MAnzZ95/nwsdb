@@ -1,0 +1,44 @@
+<div
+  class="comman-delete-dialog"
+  [dir]="'ltr'">
+  <div mat-dialog-content>
+    <div class="flex mat-dialog-title">
+      <div>
+        <div class="flex justify-center items-center">
+          <mat-icon
+            color="primary"
+            [color]="data.iconColor"
+            class="material-icons-round mat-primary blue-color"
+            >{{ data.icon }}</mat-icon
+          >
+        </div>
+      </div>
+      <div>
+        <h6 class="d-flex">{{ data.title }}</h6>
+        <p class="dits">
+          {{ data.content}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-end dialog-footer">
+    <button
+      mat-flat-button
+      class="osos-button-close-popup form-control px-5"
+      [ngClass]="'mr-5'"
+      (click)="onNoClick()">
+      <mat-icon>close</mat-icon>
+      Cancel
+    </button>
+    <button
+      mat-flat-button
+      class="btn-done"
+      color="primary"
+      [ngClass]="data.done"
+      [mat-dialog-close]="'done'">
+      <mat-icon>done</mat-icon>
+      Comfirm
+    </button>
+  </div>
+</div>

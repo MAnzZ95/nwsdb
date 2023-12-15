@@ -9,7 +9,7 @@ export interface Menu {
 
 const MENUITEMS = [
   { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer' },
-  { state: 'button', type: 'link', name: 'Lands', icon: 'crop_7_5' },
+  { state: 'land', type: 'link', name: 'Lands', icon: 'crop_7_5' },
   { state: 'grid', type: 'link', name: 'Grid List', icon: 'view_comfy' },
   { state: 'lists', type: 'link', name: 'Lists', icon: 'view_list' },
   { state: 'menu', type: 'link', name: 'Menu', icon: 'view_headline' },

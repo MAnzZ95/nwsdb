@@ -1,0 +1,79 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: initial;
+  font-family: inherit;
+  letter-spacing: inherit;
+  margin: 0;
+}
+.mdc-list-item.mdc-list-item--with-one-line {
+  height: inherit;
+}
+.mat-toolbar,
+.mat-toolbar h1,
+.mat-toolbar h2,
+.mat-toolbar h3,
+.mat-toolbar h4,
+.mat-toolbar h5,
+.mat-toolbar h6 {
+  font-weight: inherit !important;
+}
+.mat-icon {
+  display: block;
+}
+
+mat-drawer {
+  background-color: white;
+}
+
+.matInput-height {
+  height: 10px;
+}
+
+.column-selection-drawer {
+  width: 600px;
+  padding: 20px;
+}
+
+.sortBy-Refreshicon{
+  margin-left: 126px;
+}
+
+.sortBy-Refreshicon-rtl{
+  margin-right: 126px;
+}
+
+.sortBy-decrease-icon{
+  margin-left: 55px;
+  margin-top: 5px;
+}
+
+.sortBy-decrease-icon-rtl{
+  margin-right: 55px;
+  margin-top: 5px;
+}
+
+.sortBy-rotate-icon {
+  margin-left: 55px;
+  transform: rotate(180deg);
+  margin-bottom: 10px;
+}
+
+.sortBy-rotate-icon-rtl {
+  margin-right: 55px;
+  transform: rotate(180deg);
+  margin-bottom: 10px;
+}
+
+.sortBy-search-icon{
+  right: -1rem;
+}
+
+.sortBy-search-icon-rtl{
+  left: -1rem;
+}

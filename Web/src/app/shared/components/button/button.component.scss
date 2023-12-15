@@ -1,0 +1,35 @@
+.btn-save {
+  border-radius: 100px;
+  float: right;
+  background-color: #3fa5ff !important;
+  color: white !important;
+}
+.btn-save-rtl {
+  border-radius: 100px;
+  float: left;
+  background-color: #3fa5ff !important;
+  color: white !important;
+}
+.btn-view {
+  border-radius: 100px;
+  float: right;
+  background-color: transparent !important;
+  color: #3fa5ff !important;
+  margin-left: 3px;
+  border: 2px solid #3fa5ff;
+}
+.btn-save-icon {
+  color: white;
+  font-size: 12px;
+}
+
+.btn-view-icon {
+  color: #3fa5ff;
+  font-size: 12px;
+}
+.btn-delete {
+  border-radius: 100px;
+  float: right;
+  background-color: #c91313 !important;
+  color: white !important;
+}
