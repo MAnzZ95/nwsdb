@@ -5,12 +5,16 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
+using Nwsdb.Web.Api.Models.RSCs;
+using Nwsdb.Web.Api.Models.WSSs;
+
 namespace Nwsdb.Web.Api.Models.RMOs
 {
     public class Rmo : IAuditable
     {
         public Guid Id { get; set; }
         public string? RMONumber { get; set; }
+        public Guid RscId { get; set; }
         public string? Name { get; set; }
         public string? Address { get; set; }
         public string? Mobile { get; set; }
@@ -19,5 +23,8 @@ namespace Nwsdb.Web.Api.Models.RMOs
         public DateTimeOffset UpdatedDate { get; set; }
         public Guid CreatedBy { get; set; }
         public Guid UpdatedBy { get; set; }
+
+        public virtual Rsc Rsc { get; set; }
+        public ICollection<Wss> Wsses { get; set; }
     }
 }

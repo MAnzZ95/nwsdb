@@ -5,12 +5,20 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
+using Microsoft.AspNetCore.Mvc;
+using Nwsdb.Web.Api.Models.Districts;
+using Nwsdb.Web.Api.Models.GSDivisions;
+
 namespace Nwsdb.Web.Api.Models.DSDevisions
 {
     public class DSDivision
     {
         public Guid Id { get; set; }
-
+        public Guid DistrictId { get; set; }
+        public int DSDCode { get; set; }
+        
         public string? Name { get; set; }
+        public virtual District District { get; set; }
+        public ICollection<GSDivision> GSDivisions { get; set; }
     }
 }

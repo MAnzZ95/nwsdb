@@ -5,11 +5,15 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
+using Nwsdb.Web.Api.Models.RMOs;
+
 namespace Nwsdb.Web.Api.Models.WSSs
 {
     public class Wss : IAuditable
     {
         public Guid Id { get; set; }
+
+        public Guid RmoId { get; set; }
         public string? WSSNumber { get; set; }
         public string? Name { get; set; }
         public string? Address { get; set; }
@@ -20,5 +24,6 @@ namespace Nwsdb.Web.Api.Models.WSSs
         public Guid CreatedBy { get; set; }
         public Guid UpdatedBy { get; set; }
 
+        public virtual Rmo Rmo { get; set; }
     }
 }
