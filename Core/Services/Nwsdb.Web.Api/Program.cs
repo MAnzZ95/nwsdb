@@ -1,3 +1,4 @@
+using FluentAssertions.Common;
 using Nwsdb.Web.Api.Brokers.DateTimes;
 using Nwsdb.Web.Api.Brokers.Loggings;
 using Nwsdb.Web.Api.Brokers.Storages;
@@ -21,6 +22,16 @@ builder.Services.AddTransient<ILandService, LandService>();
 builder.Services.AddTransient<IDistrictService, DistrictService>();
 
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:4200") // Replace with your Angular app's URL
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -39,6 +50,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("AllowSpecificOrigin");
 app.UseAuthorization();
 
 app.MapControllers();

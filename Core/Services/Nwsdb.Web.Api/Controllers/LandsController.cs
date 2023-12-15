@@ -113,5 +113,23 @@ namespace Nwsdb.Web.Api.Controllers
             }
         }
 
+        [HttpGet("count")]
+        public ActionResult GetLandsCount()
+        {
+            try
+            {
+                int storageLandCount = landService.RetrieveAllLands().Count();
+                return Ok(storageLandCount);
+            }
+            catch(LandDependencyException landDependencyException)
+            {
+                return InternalServerError(landDependencyException);
+            }
+            catch(LandServiceException landServiceException)
+            {
+                return InternalServerError(landServiceException);
+            }
+        }
+
     }
 }
