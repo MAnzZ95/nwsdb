@@ -18,6 +18,26 @@ export const AppRoutes: Routes = [
           () => import('./modules/land/land.module').then(m => m.LandModule)
       },
       {
+        path: 'rsc',
+        loadChildren:
+          () => import('./modules/rsc/rsc.module').then(m => m.RscModule)
+      },
+      {
+        path: 'rmo',
+        loadChildren:
+          () => import('./modules/rmo/rmo.module').then(m => m.RmoModule)
+      },
+      {
+        path: 'wss',
+        loadChildren:
+          () => import('./modules/wss/wss.module').then(m => m.WssModule)
+      },
+      {
+        path: 'user',
+        loadChildren:
+          () => import('./modules/user/user.module').then(m => m.UserModule)
+      },
+      {
         path: 'dashboard',
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       }
