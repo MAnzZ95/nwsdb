@@ -13,7 +13,7 @@ using Nwsdb.Web.Api.Models.RSCs;
 
 namespace Nwsdb.Web.Api.Services.Foundations.RSCs
 {
-    public partial class RscService
+    public partial class RscService : IRscService
     {
         private readonly IStorageBroker storageBroker;
         private readonly ILoggingBroker loggingBroker;

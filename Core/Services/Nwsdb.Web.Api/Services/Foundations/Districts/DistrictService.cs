@@ -32,5 +32,15 @@ namespace Nwsdb.Web.Api.Services.Foundations.Districts
         public IQueryable<District> RetrieveAllDistricts() =>
             TryCatch(() =>
                 this.storageBroker.SelectAllDistrics());
+
+        public IQueryable<District> RetrieveAllDistrictsByProvinceId(Guid provinceId)
+        {
+            IQueryable<District> districts = this.storageBroker.SelectAllDistrics();
+
+            districts = districts.Where(dt => dt.ProvinceId == provinceId);
+
+            return districts;
+        }
+                
     }
 }

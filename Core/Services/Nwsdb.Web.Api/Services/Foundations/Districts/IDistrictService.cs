@@ -12,5 +12,7 @@ namespace Nwsdb.Web.Api.Services.Foundations.Districts
     public interface IDistrictService
     {
         IQueryable<District> RetrieveAllDistricts();
+
+        IQueryable<District> RetrieveAllDistrictsByProvinceId(Guid provinceId);
     }
 }

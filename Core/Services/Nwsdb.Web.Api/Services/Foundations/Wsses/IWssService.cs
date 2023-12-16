@@ -12,5 +12,7 @@ namespace Nwsdb.Web.Api.Services.Foundations.Wsses
     public interface IWssService
     {
         IQueryable<Wss> RetrieveAllWsses();
+        IQueryable<Wss> RetreveAllWssesByWssIdAndRmoId(Guid wssId, Guid rmoId);
+        IQueryable<Wss> RetreveAllWssesByRmoId(Guid rmoId);
     }
 }

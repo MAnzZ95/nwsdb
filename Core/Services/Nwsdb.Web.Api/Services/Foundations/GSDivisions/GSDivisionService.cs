@@ -32,5 +32,13 @@ namespace Nwsdb.Web.Api.Services.Foundations.GSDivisions
         public IQueryable<GSDivision> RetrieveAllGSDivisions() =>
             TryCatch(() =>
                 this.storageBroker.SelectAllGSDivisions());
+
+        public IQueryable<GSDivision> RetrieveAllGSDivisionsByDsDivisionId(Guid dsDivisionId)
+        {
+            IQueryable<GSDivision> gSDivisions = this.storageBroker.SelectAllGSDivisions();
+            gSDivisions =  gSDivisions.Where(gsd => gsd.DSDivisionId == dsDivisionId);
+
+            return gSDivisions;
+        }
     }
 }
