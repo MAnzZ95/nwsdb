@@ -7,6 +7,7 @@ export interface User extends BaseEntity{
     position : string;
     email : string;
     mobile : string;
+    address: string;
     password :string;   
     gender : string;
     userStatus :userStatus; 
