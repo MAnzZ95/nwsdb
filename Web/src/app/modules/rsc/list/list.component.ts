@@ -1,49 +1,32 @@
 import { HttpParams } from '@angular/common/http';
-import {
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-  inject,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { SORT_ORDER } from 'src/app/core/models/filterations/filteration.enum';
-
 import { OsosODataQuery } from 'src/app/core/models/filterations/OsosODataQuery';
-import { Land } from 'src/app/core/models/lands/land';
-import { CommonFilterationsService } from 'src/app/core/services/filterations/common-filterations/common-filterations.service';
-import { ColumnDetailsService } from 'src/app/core/services/filterations/column-details/column-details.service';
+import { SORT_ORDER } from 'src/app/core/models/filterations/filteration.enum';
 import { SortState, TableColumn } from 'src/app/core/models/filterations/filteration.model';
-import { LandService } from 'src/app/core/services/land.service';
-import { DeletePopupCommonComponent } from 'src/app/shared/components/dialog/delete-popup-common/delete-popup-common.component';
+import { Rsc } from 'src/app/core/models/rscs/rsc';
+import { ColumnDetailsService } from 'src/app/core/services/filterations/column-details/column-details.service';
+import { CommonFilterationsService } from 'src/app/core/services/filterations/common-filterations/common-filterations.service';
+import { RscService } from 'src/app/core/services/rsc.service';
 import { SnackBarNotificationService } from 'src/app/core/services/snack-notification.service';
-
-export interface PeriodicElement {
-  name: string;
-  parentcompany: string;
-  country: string;
-  basecurrency: string;
-  createdat: string;
-  createdby: string;
-  status: string;
-}
+import { DeletePopupCommonComponent } from 'src/app/shared/components';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  styleUrls: ['./list.component.scss']
 })
-export class LandsListComponent implements OnInit, OnDestroy {
-  dataSource: MatTableDataSource<Land>;
+export class RscListComponent {
+
+  dataSource: MatTableDataSource<Rsc>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataQuery = new OsosODataQuery();
-  lands: Land[] = [];
+  lands: Rsc[] = [];
   sortState!: SortState;
   subscriber!: Subscription;
   isSelectedSorting = false;
@@ -53,9 +36,9 @@ export class LandsListComponent implements OnInit, OnDestroy {
   tableColumnData!: TableColumn[];
   displayedColumns: string[] = [
     'action',
-    'landName',
-    'phone',
-    'landArea',
+    'name',
+    'rscNumber',
+    'mobile',
     'address',
     'createdDate',
     'createdby',
@@ -78,26 +61,26 @@ export class LandsListComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    private landService: LandService,
+    private rscService: RscService,
     private cdr: ChangeDetectorRef,
     private commonFilterationsService: CommonFilterationsService,
     private columnDetailsService: ColumnDetailsService,
     private dialog: MatDialog,
     private snackBarNotification: SnackBarNotificationService,
   ) {
-    this.dataSource = new MatTableDataSource<Land>([]);
+    this.dataSource = new MatTableDataSource<Rsc>([]);
   }
 
   async ngOnInit() {
     this.getColumnDetails();
-    this.getAllLandsCount();
+    this.getAllRscsCount();
     this.isSelectedSort();
     this.getAllLandsAsync();
     this.cdr.detectChanges();
   }
 
   getAllLandsAsync() {
-    const sub = this.landService.getLandDetails().subscribe(response => {
+    const sub = this.rscService.getRscDetails().subscribe(response => {
       const data = Array.isArray(response) ? response : [response];
       this.dataSource.data = data;
       this.lands = data;
@@ -117,8 +100,8 @@ export class LandsListComponent implements OnInit, OnDestroy {
     }
   }
 
-  getAllLandsCount() {
-    const sub = this.landService.getLandsCount().subscribe(response => {
+  getAllRscsCount() {
+    const sub = this.rscService.getRscsCount().subscribe(response => {
       if (response) {
         this.dataQuery.totalPages = response;
         this.clearExistingParamQuery();
@@ -155,8 +138,8 @@ export class LandsListComponent implements OnInit, OnDestroy {
   }
 
   async selectAllLandsWithPagination(ODataQuery: HttpParams) {
-    const sub = this.landService
-      .getLandDetailsWithOData(ODataQuery)
+    const sub = this.rscService
+      .getRscDetailsWithOData(ODataQuery)
       .subscribe(response => {
         if (response) {
           const data = Array.isArray(response) ? response : [response];
@@ -187,17 +170,16 @@ export class LandsListComponent implements OnInit, OnDestroy {
       .subscribe(isSelectedSorting => {
         if (this.isSelectedSorting && !isSelectedSorting) {
           this.dataQuery = new OsosODataQuery();
-          this.getAllLandsCount();
+          this.getAllRscsCount();
         }
         this.isSelectedSorting = isSelectedSorting;
       });
     this.subscription.add(sub);
   }
 
-  // viewClick(element: Company) {
-  //   const breadcrumbName = element?.companyId;
-  //   this.configurationService.setDisplayName(breadcrumbName);
-  // }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
   removeCompany(id: string) {
     let deleteMessage = '';
@@ -212,47 +194,17 @@ export class LandsListComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe((result: string | undefined) => {
       if (result) {
-        const sub = this.landService.removeLand(id).subscribe({
+        const sub = this.rscService.removeRsc(id).subscribe({
           next: () => {
             this.snackBarNotification.show(
               'success',
               'land deleted successfully'
             );
-            this.getAllLandsCount();
+            this.getAllRscsCount();
           },
         });
         this.subscription.add(sub);
       }
     });
   }
-
-  // checkAccess(grant: Grant) {
-  //   return checkAccess(
-  //     MENUID.CONFIG_COMPANY_COMPANY,
-  //     grant,
-  //     this.accessService
-  //   );
-  // }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
-  // getAllUserProfiles() {
-  //   const sub = this.userProfileService.getAllUserProfiles().subscribe({
-  //     next: data => {
-  //       this.userProfiles = data;
-  //     },
-  //   });
-  //   this.subscription.add(sub);
-  // }
-
-  // getAllCompanyRoles() {
-  //   const sub = this.companyRoleService.getAllCompanyRoles().subscribe({
-  //     next: data => {
-  //       this.companyRoles = data;
-  //     },
-  //   });
-  //   this.subscription.add(sub);
-  // }
 }

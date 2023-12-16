@@ -4,16 +4,16 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { SharedModule } from "src/app/shared/shared.module";
 import { MaterialModule } from "src/material.module";
-import { routes } from "./land.routing";
-import { LandsListComponent } from "./list/list.component";
-import { LandComponent } from "./land.component";
-import { NewLandComponent } from "./new/new.component";
+import { RscListComponent } from "./list/list.component";
+import { RscNewComponent } from "./new/new.component";
+import { RscComponent } from "./rsc.component";
+import { routes } from "./rsc.routing";
 
 @NgModule({
     declarations: [
-     LandsListComponent,
-     LandComponent,
-     NewLandComponent
+     RscListComponent,
+     RscComponent,
+     RscNewComponent
     ],
     imports: [
       RouterModule.forChild(routes),
@@ -25,4 +25,4 @@ import { NewLandComponent } from "./new/new.component";
     ],
     exports: [RouterModule],
   })
-  export class LandModule {}
+  export class RscModule {}

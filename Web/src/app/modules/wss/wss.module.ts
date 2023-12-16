@@ -4,16 +4,16 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { SharedModule } from "src/app/shared/shared.module";
 import { MaterialModule } from "src/material.module";
-import { routes } from "./land.routing";
-import { LandsListComponent } from "./list/list.component";
-import { LandComponent } from "./land.component";
-import { NewLandComponent } from "./new/new.component";
+import { WssListComponent } from "./list/list.component";
+import { WssNewComponent } from "./new/new.component";
+import { WssComponent } from "./wss.component";
+import { routes } from "./wss.routing";
 
 @NgModule({
     declarations: [
-     LandsListComponent,
-     LandComponent,
-     NewLandComponent
+     WssListComponent,
+     WssComponent,
+     WssNewComponent
     ],
     imports: [
       RouterModule.forChild(routes),
@@ -25,4 +25,4 @@ import { NewLandComponent } from "./new/new.component";
     ],
     exports: [RouterModule],
   })
-  export class LandModule {}
+  export class WssModule {}

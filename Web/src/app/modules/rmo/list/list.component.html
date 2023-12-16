@@ -1,7 +1,7 @@
-  <div class="col-12">
+<div class="col-12">
     <mat-toolbar class="sub-header">
       <div class="breadcrumb d-flex">
-          <span>Lands</span>
+          <span>Regional Manager Offices</span>
       </div>
       <div style="position: absolute; right: 50px;display: flex;">
         <button mat-flat-button color="primary" class="osos-st btn-save" [routerLink]="'new'">
@@ -43,33 +43,40 @@
           </td>
         </ng-container>
     
-        <ng-container matColumnDef="landName">
+        <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>
-            Land Name
+            Rmo Name
           </th>
           <td
             mat-cell
             *matCellDef="let element"
-            matTooltip="{{ element.landName }}"
+            matTooltip="{{ element.name }}"
             matTooltipPosition="above">
-            {{ element.landName }}
+            {{ element.name }}
           </td>
         </ng-container>
     
         <!-- Name Column -->
-        <ng-container matColumnDef="phone">
+        <ng-container matColumnDef="rmoNumber">
           <th mat-header-cell *matHeaderCellDef>
-            Phone
+            Rmo Number
           </th>
-          <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.rmoNumber }}</td>
         </ng-container>
+
+        <ng-container matColumnDef="rscName">
+            <th mat-header-cell *matHeaderCellDef>
+              Rsc Name
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.rsc.name }}</td>
+          </ng-container>
     
-        <ng-container matColumnDef="landArea">
+        <ng-container matColumnDef="mobile">
           <th mat-header-cell *matHeaderCellDef>
-            Land Area
+            Mobile
           </th>
           <td mat-cell *matCellDef="let element">
-            {{ element.landArea }}
+            {{ element.mobile }}
           </td>
         </ng-container>
     
@@ -105,13 +112,13 @@
           <td mat-cell *matCellDef="let element">
             <mat-label
               class="table-label"
-              [ngClass]="getStatusClass(element.landStatus)">
+              [ngClass]="getStatusClass(element.status)">
               {{
-                element.landStatus === 0
+                element.status === 0
                   ? ('active')
-                  : element.landStatus === 1
+                  : element.status === 1
                     ? ('inactive')
-                    : element.landStatus === 2
+                    : element.status === 2
                       ? ('delete')
                       : ''
               }}

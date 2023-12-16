@@ -1,1 +1,441 @@
-<p>new works!</p>
+<div class="col-12">
+    <form [formGroup]="inputForm" (ngSubmit)="saveCompany()">
+        <mat-toolbar class="sub-header" style="margin-bottom: 5px;">
+          <div class="breadcrumb d-flex">
+            <span style="font-size: medium;">Lands / </span>
+            <!-- <button mat-icon-button>
+              <mat-icon>keyboard_arrow_right</mat-icon>
+            </button> -->
+            <span style="font-size: medium;"> New</span>
+          </div>
+
+          <div style="position: absolute; right: 20px;">
+            <app-switchbase
+              class="checkbox mt-3  mr-5"
+              switchbasecolor="worm"
+              switchbasestyle="swichbase-customize-Style"
+              (valueChange)="onActiveStatusChange($event)"
+              [labelValue]="'Active'"
+              [checked]="true" />
+            <app-button
+              buttonType="button"
+              [lableValue]="'Cancel'"
+              Iconcss="btn-view-icon material-icons-outlined"
+              Buttoncss="btn-view"
+              iconValue="cancel"
+              class="mr-4"
+              style="margin-right: 20px;"
+              (buttonClicked)="onCancel()" />
+            <app-button
+              [lableValue]="'Save'"
+              Iconcss="btn-save-icon material-icons-outlined"
+              Buttoncss="btn-save"
+              iconValue="save" />
+          </div>
+        </mat-toolbar>
+
+        <div style="margin-bottom: 5px;">
+          <div >
+            <div fxLayout="row">
+              <mat-accordion>
+                <mat-expansion-panel
+                  (opened)="(true)"
+                  (closed)="(false)"
+                  [expanded]="true">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>{{
+                      'Basic Details'
+                    }}</mat-panel-title>
+                  </mat-expansion-panel-header>
+
+                    <mat-grid-list rowHeight="75px" cols="12">
+                      <mat-grid-tile colspan="3">
+                        <mat-form-field class="form-control">
+                          <mat-label>{{
+                            'Land Name'
+                          }}</mat-label>
+                          <input
+                            type="text"
+                            id="landName"
+                            class="form-control"
+                            matInput
+                            placeholder="CAMP-1234"
+                            formControlName="landName" />
+                          <!-- <mat-error
+                            *ngIf="
+                              !inputForm.get('basicDetail.companyId')?.valid &&
+                              inputForm.get('basicDetail.companyId')?.touched
+                            ">
+                            {{ getCompanyIdErrorMessage() }}
+                          </mat-error> -->
+                        </mat-form-field>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile colspan="3">
+                        <mat-form-field class="form-control">
+                          <mat-label>{{
+                            'Phone'
+                          }}</mat-label>
+                          <input
+                            type="text"
+                            id="phone"
+                            class="form-control"
+                            matInput
+                            placeholder="+9477934321"
+                            formControlName="phone" />
+                          <!-- <mat-error
+                            *ngIf="
+                              !inputForm.get('basicDetail.companyId')?.valid &&
+                              inputForm.get('basicDetail.companyId')?.touched
+                            ">
+                            {{ getCompanyIdErrorMessage() }}
+                          </mat-error> -->
+                        </mat-form-field>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile colspan="3">
+                        <mat-form-field class="form-control">
+                          <mat-label>{{
+                            'Area'
+                          }}</mat-label>
+                          <input
+                            type="text"
+                            id="area"
+                            class="form-control"
+                            matInput
+                            placeholder="234.90"
+                            formControlName="area" />
+                          <!-- <mat-error
+                            *ngIf="
+                              !inputForm.get('basicDetail.companyId')?.valid &&
+                              inputForm.get('basicDetail.companyId')?.touched
+                            ">
+                            {{ getCompanyIdErrorMessage() }}
+                          </mat-error> -->
+                        </mat-form-field>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile colspan="3">
+                        <mat-form-field
+                          class="form-control">
+                          <mat-label>Land Type</mat-label>
+                          <mat-select
+                            formControlName="landType"
+                            class="form-control">
+                            <mat-option
+                              *ngFor="let landType of landTypes"
+                              [value]="landType.id">
+                              {{ landType.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </mat-grid-tile>
+                    </mat-grid-list>
+
+                    <mat-grid-list rowHeight="75px" cols="1">
+                      <mat-grid-tile>
+                        <mat-form-field class="form-control">
+                          <mat-label>{{
+                            'Address'
+                          }}</mat-label>
+                          <input
+                            type="text"
+                            id="address"
+                            class="form-control"
+                            matInput
+                            placeholder="address"
+                            formControlName="address" />
+                          <!-- <mat-error
+                            *ngIf="
+                              !inputForm.get('basicDetail.companyId')?.valid &&
+                              inputForm.get('basicDetail.companyId')?.touched
+                            ">
+                            {{ getCompanyIdErrorMessage() }}
+                          </mat-error> -->
+                        </mat-form-field>
+                      </mat-grid-tile>
+                    </mat-grid-list>
+                    
+
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 5px;">
+          <div >
+            <div fxLayout="row">
+              <mat-accordion>
+                <mat-expansion-panel
+                  (opened)="(true)"
+                  (closed)="(false)"
+                  [expanded]="true">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>{{
+                      'Land Informations'
+                    }}</mat-panel-title>
+                  </mat-expansion-panel-header>
+
+                    <mat-grid-list rowHeight="75px" cols="12">
+                      <mat-grid-tile colspan="3">
+                        <mat-form-field
+                          class="form-control">
+                          <mat-label>Province</mat-label>
+                          <mat-select
+                            formControlName="province"
+                            (selectionChange)="onProvinceChanged($event)"
+                            class="form-control">
+                            <mat-option
+                              *ngFor="let province of provinces"
+                              [value]="province.id">
+                              {{ province.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile colspan="3">
+                        <mat-form-field
+                          class="form-control">
+                          <mat-label>District</mat-label>
+                          <mat-select
+                            formControlName="district"
+                            (selectionChange)="onDistrictChanged($event)"
+                            class="form-control">
+                            <mat-option
+                              *ngFor="let district of districts"
+                              [value]="district.id">
+                              {{ district.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile colspan="3">
+                        <mat-form-field
+                          class="form-control">
+                          <mat-label>DSDivision</mat-label>
+                          <mat-select
+                            formControlName="dsDivision"
+                            (selectionChange)="onDSDivisionChanged($event)"
+                            class="form-control">
+                            <mat-option
+                              *ngFor="let dsDivision of dsDivisions"
+                              [value]="dsDivision.id">
+                              {{ dsDivision.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile colspan="3">
+                        <mat-form-field
+                          class="form-control">
+                          <mat-label>GVDivision</mat-label>
+                          <mat-select
+                            formControlName="gvDivision"
+                            (selectionChange)="onGVDivisionChanged($event)"
+                            class="form-control">
+                            <mat-option
+                              *ngFor="let gvDivision of gvDivisions"
+                              [value]="gvDivision.id">
+                              {{ gvDivision.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </mat-grid-tile>
+                    </mat-grid-list>
+
+                    <mat-grid-list rowHeight="75px" cols="12">
+                      <mat-grid-tile colspan="3">
+                        <mat-form-field
+                          class="form-control">
+                          <mat-label>Owner Ship</mat-label>
+                          <mat-select
+                            formControlName="ownerShip"
+                            class="form-control">
+                            <mat-option
+                              *ngFor="let ownerShip of ownerShips"
+                              [value]="ownerShip.id">
+                              {{ ownerShip.owner }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile colspan="3">
+                        <mat-form-field
+                          class="form-control">
+                          <mat-label>Sub Category</mat-label>
+                          <mat-select
+                            formControlName="subCategory"
+                            class="form-control">
+                            <mat-option
+                              *ngFor="let category of categories"
+                              [value]="category.id">
+                              {{ category.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile colspan="3">
+                        <mat-form-field
+                          class="form-control">
+                          <mat-label>RSC</mat-label>
+                          <mat-select
+                            formControlName="rsc"
+                            (selectionChange)="onRscChanged($event)"
+                            class="form-control">
+                            <mat-option
+                              *ngFor="let rsc of rscs"
+                              [value]="rsc.id">
+                              {{ rsc.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile colspan="3">
+                        <mat-form-field
+                          class="form-control">
+                          <mat-label>RMO</mat-label>
+                          <mat-select
+                            formControlName="rmo"
+                            (selectionChange)="onRmoChanged($event)"
+                            class="form-control">
+                            <mat-option
+                              *ngFor="let rmo of rmos"
+                              [value]="rmo.id">
+                              {{ rmo.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </mat-grid-tile>
+                    </mat-grid-list>
+
+                    <mat-grid-list rowHeight="75px" cols="12">
+                      <mat-grid-tile colspan="3">
+                        <mat-form-field
+                          class="form-control">
+                          <mat-label>WSS</mat-label>
+                          <mat-select
+                            formControlName="wss"
+                            class="form-control">
+                            <mat-option
+                              *ngFor="let wss of wsses"
+                              [value]="wss.id">
+                              {{ wss.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </mat-grid-tile>
+
+                                         
+                    </mat-grid-list>
+
+                                       
+
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+        </div>
+      
+        <!-- <div style="margin-bottom: 5px;">
+          <div >
+            <div fxLayout="row">
+              <mat-accordion>
+                <mat-expansion-panel
+                  (opened)="(true)"
+                  (closed)="(false)"
+                  [expanded]="true">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>{{
+                      'Land Status'
+                    }}</mat-panel-title>
+                  </mat-expansion-panel-header>
+
+                    <mat-grid-list rowHeight="75px" cols="12">
+                      <mat-grid-tile colspan="3">
+                          <mat-radio-group aria-label="Select an option" formControlName="landStatus" class="form-control">
+                            <mat-radio-button value="1">IsIssue</mat-radio-button>
+                            <mat-radio-button value="2"></mat-radio-button>
+                          </mat-radio-group>
+                      </mat-grid-tile>
+                    </mat-grid-list>                  
+
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+        </div> -->
+
+        <div style="margin-bottom: 5px;">
+          <div >
+            <div fxLayout="row">
+              <mat-accordion>
+                <mat-expansion-panel
+                  (opened)="(true)"
+                  (closed)="(false)"
+                  [expanded]="true">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>{{
+                      'Legal Issue Status'
+                    }}</mat-panel-title>
+                  </mat-expansion-panel-header>
+
+                    <mat-grid-list rowHeight="75px" cols="12">
+                      <!-- <mat-grid-tile colspan="3">
+                          <mat-radio-group aria-label="Select an option" formControlName="landStatus" class="form-control">
+                            <mat-radio-button value="1">Approved</mat-radio-button>
+                            <mat-radio-button value="2">Pending</mat-radio-button>
+                          </mat-radio-group>
+                      </mat-grid-tile> -->
+
+                      <mat-grid-tile colspan="3">
+                        <mat-form-field
+                          class="form-control">
+                          <mat-label>Legal Issue</mat-label>
+                          <mat-select
+                            formControlName="legalStatus"
+                            (selectionChange)="onLegalIssueChanged($event)"
+                            class="form-control">
+                            <mat-option value="0">Yes</mat-option>
+                            <mat-option value="1">No</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile colspan="9">
+                        <mat-form-field class="form-control">
+                          <mat-label>{{
+                            'Remark'
+                          }}</mat-label>
+                          <input
+                            type="text"
+                            id="remark"
+                            class="form-control"
+                            matInput
+                            placeholder="CAMP-1234"
+                            formControlName="remark" />
+                          <!-- <mat-error
+                            *ngIf="
+                              !inputForm.get('basicDetail.companyId')?.valid &&
+                              inputForm.get('basicDetail.companyId')?.touched
+                            ">
+                            {{ getCompanyIdErrorMessage() }}
+                          </mat-error> -->
+                        </mat-form-field>
+                      </mat-grid-tile>
+                    </mat-grid-list>                  
+
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+        </div>
+        
+    </form>
+</div>

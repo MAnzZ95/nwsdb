@@ -1,7 +1,7 @@
-  <div class="col-12">
+<div class="col-12">
     <mat-toolbar class="sub-header">
       <div class="breadcrumb d-flex">
-          <span>Lands</span>
+          <span>Users</span>
       </div>
       <div style="position: absolute; right: 50px;display: flex;">
         <button mat-flat-button color="primary" class="osos-st btn-save" [routerLink]="'new'">
@@ -43,33 +43,40 @@
           </td>
         </ng-container>
     
-        <ng-container matColumnDef="landName">
+        <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>
-            Land Name
+            User Name
           </th>
           <td
             mat-cell
             *matCellDef="let element"
-            matTooltip="{{ element.landName }}"
+            matTooltip="{{ element.name }}"
             matTooltipPosition="above">
-            {{ element.landName }}
+            {{ element.name }}
           </td>
         </ng-container>
     
         <!-- Name Column -->
-        <ng-container matColumnDef="phone">
+        <ng-container matColumnDef="position">
           <th mat-header-cell *matHeaderCellDef>
-            Phone
+            Position
           </th>
-          <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.position }}</td>
         </ng-container>
+
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>
+              Email
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+          </ng-container>
     
-        <ng-container matColumnDef="landArea">
+        <ng-container matColumnDef="mobile">
           <th mat-header-cell *matHeaderCellDef>
-            Land Area
+            Mobile
           </th>
           <td mat-cell *matCellDef="let element">
-            {{ element.landArea }}
+            {{ element.mobile }}
           </td>
         </ng-container>
     
@@ -105,7 +112,7 @@
           <td mat-cell *matCellDef="let element">
             <mat-label
               class="table-label"
-              [ngClass]="getStatusClass(element.landStatus)">
+              [ngClass]="getStatusClass(element.wssStatus)">
               {{
                 element.landStatus === 0
                   ? ('active')
