@@ -14,6 +14,8 @@ using RESTFulSense.Controllers;
 using Nwsdb.Web.Api.Services.Foundations.RSCs;
 using Nwsdb.Web.Api.Models.RSCs;
 using Nwsdb.Web.Api.Models.RSCs.Exceptions;
+using Nwsdb.Web.Api.Models.RMOs.Exceptions;
+using Nwsdb.Web.Api.Services.Foundations.RMOs;
 
 namespace Nwsdb.Web.Api.Controllers
 {
@@ -36,6 +38,24 @@ namespace Nwsdb.Web.Api.Controllers
                 IQueryable<Rsc> storageRscs =
                     this.rscService.RetrieveAllRscs();
                 return Ok(storageRscs);
+            }
+            catch (RscDependencyException rscDependencyException)
+            {
+                return InternalServerError(rscDependencyException);
+            }
+            catch (RscServiceException rscServiceException)
+            {
+                return InternalServerError(rscServiceException);
+            }
+        }
+
+        [HttpGet("count")]
+        public ActionResult GetRscsCount()
+        {
+            try
+            {
+                int storageRscCount = rscService.RetrieveAllRscs().Count();
+                return Ok(storageRscCount);
             }
             catch (RscDependencyException rscDependencyException)
             {

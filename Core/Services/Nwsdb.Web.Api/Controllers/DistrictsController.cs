@@ -38,5 +38,23 @@ namespace Nwsdb.Web.Api.Controllers
                 return InternalServerError(landServiceException);
             }
         }
+
+        [HttpGet("{provinceId}")]
+        public async ValueTask<ActionResult<IQueryable<District>>> GetDistrictsByProvinceId(Guid provinceId)
+        {
+            try
+            {
+                var retrivedDistricts = this.districtService.RetrieveAllDistrictsByProvinceId(provinceId);
+                return Ok(retrivedDistricts);
+            }
+            catch (DistrictDependencyException landDependencyException)
+            {
+                return InternalServerError(landDependencyException);
+            }
+            catch (DistrictServiceException landServiceException)
+            {
+                return InternalServerError(landServiceException);
+            }
+        }
     }
 }
