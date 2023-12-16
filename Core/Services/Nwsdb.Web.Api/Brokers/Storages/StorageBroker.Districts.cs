@@ -18,7 +18,7 @@ namespace Nwsdb.Web.Api.Brokers.Storages
             await InsertAsync(district);
 
         public IQueryable<District> SelectAllDistrics() =>
-            this.Districts;
+            this.Districts.Include(dt=> dt.Province);
 
         public async ValueTask<District> UpdateDistrictAsync(District district) =>
             await UpdateAsync(district);

@@ -19,7 +19,7 @@ namespace Nwsdb.Web.Api.Brokers.Storages
             await InsertAsync(rmo);
 
         public IQueryable<Rmo> SelectAllRmos() =>
-            this.Rmos;
+            this.Rmos.Include(rmo => rmo.Rsc);
 
         public async ValueTask<Rmo> UpdateRmoAsync(Rmo rmo) =>
             await UpdateAsync(rmo);
