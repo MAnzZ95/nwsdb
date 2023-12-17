@@ -1,0 +1,449 @@
+<div class="common-component">
+  <div class="d-flex toolbar-icons">
+    <div class="hidden sm:block">
+      <button
+        mat-icon-button
+        aria-label="Example icon button with a vertical three dot icon"
+        (click)="clickEvent()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+    <button [matMenuTriggerFor]="MobileFilter" class="sm:hidden">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      aria-label="Example icon button with a vertical three dot icon">
+      <mat-icon>favorite_outline</mat-icon>
+    </button>
+    <div class="hidden sm:block">
+      <button
+        (click)="handleGroupBy()"
+        mat-icon-button
+        aria-label="Example icon button with a vertical three dot icon">
+        <mat-icon>view_day_outline</mat-icon>
+      </button>
+    </div>
+    <div class="hidden sm:block">
+      <button
+        (click)="handleSortBy()"
+        mat-icon-button
+        matTooltip="Sort by"
+        aria-label="Example icon button with a vertical three dot icon">
+        <mat-icon>sort_by_alpha_outline</mat-icon>
+      </button>
+    </div>
+    <div class="hidden sm:block">
+      <button
+        (click)="handleColumnSelection()"
+        mat-icon-button
+        aria-label="Example icon button with a vertical three dot icon">
+        <mat-icon> table_chart_outline</mat-icon>
+      </button>
+    </div>
+    <div class="hidden sm:block">
+      <button
+        (click)="handleFilterBy()"
+        mat-icon-button
+        aria-label="Example icon button with a vertical three dot icon">
+        <mat-icon>filter_alt</mat-icon>
+      </button>
+    </div>
+    <button
+      mat-icon-button
+      aria-label="Example icon button with a vertical three dot icon">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+</div>
+<mat-menu class="mobile-menu-filter" #MobileFilter="matMenu">
+  <button mat-menu-item (click)="clickEvent()">
+    search
+  </button>
+  <button mat-menu-item (click)="handleGroupBy()">
+    groupby
+  </button>
+  <button mat-menu-item (click)="handleSortBy()">
+    sort by
+  </button>
+  <button mat-menu-item (click)="handleColumnSelection()">
+    title
+  </button>
+  <button mat-menu-item (click)="handleFilterBy()">
+    filter by
+  </button>
+</mat-menu>
+
+<!-- Group By -->
+<mat-drawer
+  #groupby
+  class="p-3 comman-drawer osos-sort-drawer"
+  mode="over"
+  position="end"
+  position="end">
+  <div
+    class="grid grid-cols-12 mt-4 ml-4">
+    <h4 class="m-0 col-span-10 font-medium">
+      group by
+    </h4>
+    <mat-icon
+      class="col-span-2 osos-drawer-header cursor-pointer"
+      (click)="groupby.close()"
+      >refresh</mat-icon
+    >
+  </div>
+  <mat-list>
+    <mat-form-field>
+      <input
+        matInput
+        class="matInput-height"
+        placeholder="input field" />
+    </mat-form-field>
+    <br />
+    <mat-list-item>
+      <mat-radio-button>
+        <h5>Group 3</h5>
+      </mat-radio-button>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-radio-button>
+        <h5>Group 5</h5>
+      </mat-radio-button>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-radio-button>
+        <h5>Group 6</h5>
+      </mat-radio-button>
+    </mat-list-item>
+  </mat-list>
+</mat-drawer>
+
+<!-- COLUMN SELECTION SECTION -->
+<!-- <mat-drawer
+  #columnselection
+  class="sortdrawer comman-drawer columnselection column-selection-drawer osos-sort-drawer"
+  mode="side"
+  position="end">
+  <div class="grid grid-cols-12">
+    <h4 class="m-0 col-span-10 font-medium">
+      title
+    </h4>
+    <mat-icon
+      class="col-span-1 osos-drawer-header cursor-pointer"
+      (click)="handleRefreshColumnSelection()"
+      >refresh</mat-icon
+    >
+    <mat-icon
+      class="col-span-1 osos-drawer-header cursor-pointer"
+      (click)="handleColumnSelection()"
+      >close</mat-icon
+    >
+  </div>
+  <mat-tab-group class="osos-tab-height">
+    <mat-radio-group aria-label="Select an option">
+      <mat-radio-button value="1"
+        ><mat-tab
+          [label]="
+            translateService.instant(
+              'configuration.tableOptions.columnSelection.defaultColumnSelection'
+            )
+          ">
+          <div cdkDropListGroup class="mt-4 grid grid-cols-12 h-10">
+            <div class="gap-4 col-span-12 bg-gray-100 p-3 rounded">
+              <h1>
+                {{
+                  translateService.instant(
+                    'configuration.tableOptions.columnSelection.selectedFields'
+                  )
+                }}
+              </h1>
+              <div
+                cdkDropList
+                [cdkDropListData]="defaultTableColumn"
+                class="example-list osos-column-selection"
+                (cdkDropListDropped)="drop($event)">
+                <span *ngFor="let item of defaultTableColumn">
+                  <div
+                    class="example-box example-box-black-text"
+                    *ngIf="item.isDefault"
+                    cdkDrag>
+                    {{ item.displayName }}
+                  </div>
+                </span>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-radio-button>
+      <mat-radio-button value="2"
+        ><mat-tab
+          [label]="
+            translateService.instant(
+              'configuration.tableOptions.columnSelection.manualColumnSelection'
+            )
+          ">
+          <div cdkDropListGroup class="mt-4 grid grid-cols-12 h-10">
+            <div class="gap-4 col-span-5 bg-gray-100 p-3 rounded">
+              <h1>Available Fields</h1>
+              <div class="flex items-center">
+                <mat-form-field>
+                  <mat-label class="text-xs">{{
+                    translateService.instant(
+                      'configuration.commonButtons.search'
+                    )
+                  }}</mat-label>
+                  <div class="relative flex">
+                    <input matInput (keyup)="filterAvailableList($event)" />
+                    <div
+                      class="absolute top-1/2 transform -translate-y-1/2"
+                      [ngClass]="
+                        (languageService.isRTL | async) ? 'left-3' : 'right-3'
+                      ">
+                      <mat-icon class="text-xs">search</mat-icon>
+                    </div>
+                  </div>
+                </mat-form-field>
+              </div>
+              <div
+                cdkDropList
+                #availableColumn="cdkDropList"
+                [cdkDropListData]="availableTableColumn"
+                [cdkDropListConnectedTo]="[defaultColumn]"
+                class="example-list osos-column-selection"
+                (cdkDropListDropped)="drop($event)">
+                <div
+                  class="example-box example-box-black-text"
+                  *ngFor="let item of availableTableColumn"
+                  cdkDrag>
+                  {{ item.displayName }}
+                </div>
+              </div>
+            </div>
+            <div
+              class="block my-auto gap-4 col-span-1 p-4 items-center justify-center">
+              <mat-icon>keyboard_arrow_right</mat-icon>
+              <mat-icon>keyboard_arrow_left</mat-icon>
+            </div>
+            <div class="gap-4 col-span-5 bg-gray-100 p-3 rounded">
+              <h1>
+                {{
+                  translateService.instant(
+                    'configuration.tableOptions.columnSelection.selectedFields'
+                  )
+                }}
+              </h1>
+              <div class="flex items-center">
+                <mat-form-field>
+                  <mat-label>{{
+                    translateService.instant(
+                      'configuration.commonButtons.search'
+                    )
+                  }}</mat-label>
+                  <div class="relative flex">
+                    <input matInput (keyup)="filterDefaultList($event)" />
+                    <div
+                      class="absolute top-1/2 transform -translate-y-1/2 right-3"
+                      >
+                      <mat-icon>search</mat-icon>
+                    </div>
+                  </div>
+                </mat-form-field>
+              </div>
+              <div
+                cdkDropList
+                #defaultColumn="cdkDropList"
+                [cdkDropListData]="defaultTableColumn"
+                [cdkDropListConnectedTo]="[availableColumn]"
+                class="example-list osos-column-selection"
+                (cdkDropListDropped)="drop($event)">
+                <div
+                  class="example-box example-box-black-text"
+                  *ngFor="let item of defaultTableColumn"
+                  cdkDrag>
+                  {{ item.displayName }}
+                </div>
+              </div>
+            </div>
+            <div class="block my-auto gap-4 col-span-1 p-4">
+              <mat-icon>keyboard_double_arrow_up</mat-icon>
+              <mat-icon>keyboard_arrow_up</mat-icon>
+              <mat-icon>keyboard_arrow_down</mat-icon>
+              <mat-icon>keyboard_double_arrow_down</mat-icon>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-tab-group>
+</mat-drawer> -->
+
+<!-- SORTBY SECTION -->
+<mat-drawer
+  #sort
+  class="p-3 comman-drawer osos-sort-drawer"
+  mode="over"
+  position="end">
+  <div
+    class="flex items-center ml-4">
+    <h4 class="font-medium">
+     Sort by
+    </h4>
+    <mat-icon
+      class="osos-drawer-header cursor-pointer sortBy-Refreshicon mt-2"
+      (click)="handleRefreshSortBy()"
+      >refresh</mat-icon
+    >
+  </div>
+  <mat-radio-group>
+    <mat-list>
+      <mat-list-item>
+        <mat-radio-button
+          [value]="SORT_ORDER.ASC"
+          (click)="setSortOrder(SORT_ORDER.ASC)"
+          [checked]="sortOrder === SORT_ORDER.ASC">
+          <div class="flex items-center cursor-pointer">
+            <h5>
+              Accending
+            </h5>
+            <mat-icon class="osos-drawer-header sortBy-rotate-icon"
+              >filter_list</mat-icon
+            >
+          </div>
+        </mat-radio-button>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-radio-button
+          [value]="SORT_ORDER.DESC"
+          (change)="setSortOrder(SORT_ORDER.DESC)"
+          [checked]="sortOrder === SORT_ORDER.DESC">
+          <div class="flex items-center cursor-pointer">
+            <h5>
+              Decending
+            </h5>
+            <mat-icon class="osos-drawer-header sortBy-decrease-icon"
+              >filter_list</mat-icon
+            >
+          </div>
+        </mat-radio-button>
+      </mat-list-item>
+    </mat-list>
+  </mat-radio-group>
+  <mat-divider></mat-divider>
+  <mat-form-field class="sort-by-outter">
+    <mat-label>Search</mat-label>
+    <div class="relative flex">
+      <input matInput (keyup)="filterDefaultList($event)" />
+      <div class="absolute top-2 transform -translate-y-1/2 sortBy-search-icon">
+        <mat-icon class="osos-drawer-header">search</mat-icon>
+      </div>
+    </div>
+  </mat-form-field>
+  <br />
+  <mat-radio-group #radioGroup>
+    <mat-list>
+      <mat-list-item *ngFor="let prop of defaultTableColumn">
+        <mat-radio-button
+          [checked]="shouldCheckRadioButton(prop)"
+          [value]="prop"
+          (change)="setProperty($event)">
+          <h5>{{ prop.displayName }}</h5>
+        </mat-radio-button>
+      </mat-list-item>
+    </mat-list>
+  </mat-radio-group>
+</mat-drawer>
+
+<!-- Filter Section-->
+<mat-drawer
+  #filter
+  class="sortdrawer comman-drawer osos-sort-drawer"
+  mode="over"
+  position="end"
+  position="end"
+  [dir]="'ltr'">
+  <div class="grid grid-cols-12 mt-4 ml-4">
+    <h4 class="m-0 col-span-8 font-medium">
+      Filter By
+    </h4>
+    <mat-icon
+      class="col-span-2 osos-drawer-header cursor-pointer"
+      (click)="filter.close()"
+      >refresh</mat-icon
+    >
+    <mat-icon
+      class="col-span-2 osos-drawer-header cursor-pointer"
+      (click)="filter.close()"
+      >save</mat-icon
+    >
+  </div>
+  <mat-list>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        class="matInput-height"
+        [placeholder]="
+          'Input Field'
+        " />
+    </mat-form-field>
+    <div class="overflow-hidden">
+      <mat-expansion-panel class="m-[10px] sm:w-[250px]">
+        <mat-expansion-panel-header
+          (click)="toggle()"
+          id="bt"
+          class="p-3"
+          [collapsedHeight]="'100px'"
+          [expandedHeight]="'50px'">
+          <mat-panel-title class="mt-4">
+            <div>
+              <mat-icon class="Pt-2 text-gray-300 osos-drawer-dragicon"
+                >drag_indicator</mat-icon
+              >
+              <div class="d-flex">
+                <h1 class="osos-text-color-black">test</h1>
+              </div>
+
+              <div *ngIf="showTitle">
+                <p class="ml-4 mt-2">= Equal to</p>
+                <h1 class="osos-text-color-black ml-4 mt-2">test</h1>
+              </div>
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div>
+          <mat-form-field>
+            <mat-label>Filter By</mat-label>
+            <select matNativeControl required>
+              <option class="p-3" value="volvo">Default Currency</option>
+              <option value="saab">Created Date</option>
+              <option value="mercedes">Created By</option>
+              <option value="audi">Status</option>
+            </select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Operator</mat-label>
+            <select matNativeControl required>
+              <option value="volvo">= Equal to</option>
+              <option value="saab">> Greater Than</option>
+              <option value="mercedes">>= Greater than or Equal to</option>
+              <option value="audi">Status</option>
+            </select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Value</mat-label>
+            <select matNativeControl required>
+              <option value="volvo">Sadara Group</option>
+              <option value="saab">Gears Software</option>
+              <option value="mercedes">OSOS</option>
+            </select>
+          </mat-form-field>
+        </div>
+        <div class="w-full d-flex">
+          <h5>test</h5>
+          <mat-icon class="text-red-500 mb-2 absolute right-[20px]"
+            >delete_outline</mat-icon
+          >
+        </div>
+      </mat-expansion-panel>
+    </div>
+  </mat-list>
+</mat-drawer>

@@ -12,5 +12,7 @@ namespace Nwsdb.Web.Api.Services.Foundations.GSDivisions
     public interface IGSDivisionService
     {
         IQueryable<GSDivision> RetrieveAllGSDivisions();
+
+        IQueryable<GSDivision> RetrieveAllGSDivisionsByDsDivisionId(Guid dsDivisionId);
     }
 }

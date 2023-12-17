@@ -18,7 +18,7 @@ namespace Nwsdb.Web.Api.Brokers.Storages
             await InsertAsync(dsDivision);
 
         public IQueryable<DSDivision> SelectAllDSDivisions() =>
-            this.DSDivisions;
+            this.DSDivisions.Include(dsd => dsd.District);
 
         public async ValueTask<DSDivision> UpdateDSDivisionAsync(DSDivision dsDivision) =>
             await UpdateAsync(dsDivision);

@@ -3,7 +3,7 @@ import { RscStatus } from "./rsc-status";
 
 export interface Rsc extends BaseEntity{
     id: string;
-    rmoNumber: string;
+    rscNumber: string;
     name: string;
     address: string;
     mobile: string;

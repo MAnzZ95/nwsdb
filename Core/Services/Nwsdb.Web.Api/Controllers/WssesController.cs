@@ -14,6 +14,8 @@ using Nwsdb.Web.Api.Services.Foundations.Wsses;
 using RESTFulSense.Controllers;
 using Nwsdb.Web.Api.Models.WSSs;
 using Nwsdb.Web.Api.Models.WSSs.Exceptions;
+using Nwsdb.Web.Api.Models.Users.Exceptions;
+using Nwsdb.Web.Api.Services.Foundations.Users;
 
 namespace Nwsdb.Web.Api.Controllers
 {
@@ -21,11 +23,11 @@ namespace Nwsdb.Web.Api.Controllers
     [ApiController]
     public class WssesController : RESTFulController
     {
-        private readonly IWssService WssService;
+        private readonly IWssService wssService;
 
         public WssesController(IWssService WssService)
         {
-            this.WssService = WssService;
+            this.wssService = WssService;
         }
 
         [HttpGet]
@@ -34,8 +36,66 @@ namespace Nwsdb.Web.Api.Controllers
             try
             {
                 IQueryable<Wss> storageLands =
-                    this.WssService.RetrieveAllWsses();
+                    this.wssService.RetrieveAllWsses();
                 return Ok(storageLands);
+            }
+            catch (WssDependencyException WssDependencyException)
+            {
+                return InternalServerError(WssDependencyException);
+            }
+            catch (WssServiceException WssServiceException)
+            {
+                return InternalServerError(WssServiceException);
+            }
+        }
+
+        [HttpGet("count")]
+        public ActionResult GetWssesCount()
+        {
+            try
+            {
+                int storagewssesCount = wssService.RetrieveAllWsses().Count();
+                return Ok(storagewssesCount);
+            }
+            catch (WssDependencyException wssDependencyException)
+            {
+                return InternalServerError(wssDependencyException);
+            }
+            catch (WssServiceException wssServiceException)
+            {
+                return InternalServerError(wssServiceException);
+            }
+        }
+
+        [HttpGet("{wssId}/{rmoId}")]
+        public async ValueTask<ActionResult<IQueryable<Wss>>> GetAllWssesByWssIdAndRmoId(Guid wssId, Guid rmoId )
+        {
+            try
+            {
+                IQueryable<Wss> storageWsses =
+                    this.wssService.RetreveAllWssesByWssIdAndRmoId(wssId,rmoId);
+
+                return Ok(storageWsses);
+            }
+            catch (WssDependencyException WssDependencyException)
+            {
+                return InternalServerError(WssDependencyException);
+            }
+            catch (WssServiceException WssServiceException)
+            {
+                return InternalServerError(WssServiceException);
+            }
+        }
+
+        [HttpGet("{rmoId}")]
+        public async ValueTask<ActionResult<IQueryable<Wss>>> GetAllWssesByRmoId(Guid rmoId)
+        {
+            try
+            {
+                IQueryable<Wss> storageWsses =
+                    this.wssService.RetreveAllWssesByRmoId( rmoId);
+
+                return Ok(storageWsses);
             }
             catch (WssDependencyException WssDependencyException)
             {

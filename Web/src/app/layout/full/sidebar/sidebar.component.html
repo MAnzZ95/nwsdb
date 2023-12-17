@@ -31,7 +31,44 @@
             <span fxFlex></span>
 
         </a>
+        <a class="" appAccordionToggle [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'expandable'">
+            <div appAccordionLink>
+                <mat-icon>{{ menuitem.icon }}</mat-icon>
+                <span>{{ menuitem.name }}</span>
+                <mat-icon class="accordion-icon" [ngClass]="{ 'expanded': isExpanded }">expand_more</mat-icon>
+              </div>
+              <mat-list *ngIf="isExpanded">
+                <ng-container *ngFor="let childItem of menuitem.children">
+                  <mat-list-item>
+                    <a [routerLink]="['/', childItem.state]" routerLinkActive="selected">
+                      <mat-icon>{{ childItem.icon }}</mat-icon>
+                      <span>{{ childItem.name }}</span>
+                      <span fxFlex></span>
+                    </a>
+                  </mat-list-item>
+                </ng-container>
+              </mat-list>
+        </a>
 
     </mat-list-item>
+
+    <!-- <mat-list-item *ngIf="menuitem.type === 'expandable'">
+        <div appAccordionLink>
+          <mat-icon>{{ menuItem.icon }}</mat-icon>
+          <span>{{ menuItem.name }}</span>
+          <mat-icon class="accordion-icon" [ngClass]="{ 'expanded': isExpanded }">expand_more</mat-icon>
+        </div>
+        <mat-list *ngIf="isExpanded">
+          <ng-container *ngFor="let childItem of menuItem.children">
+            <mat-list-item>
+              <a [routerLink]="['/', childItem.state]" routerLinkActive="selected">
+                <mat-icon>{{ childItem.icon }}</mat-icon>
+                <span>{{ childItem.name }}</span>
+                <span fxFlex></span>
+              </a>
+            </mat-list-item>
+          </ng-container>
+        </mat-list>
+      </mat-list-item> -->
 
 </mat-nav-list>

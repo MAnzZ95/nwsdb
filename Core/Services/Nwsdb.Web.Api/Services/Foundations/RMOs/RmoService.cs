@@ -10,6 +10,7 @@ using Nwsdb.Web.Api.Brokers.Loggings;
 using Nwsdb.Web.Api.Brokers.Storages;
 using Nwsdb.Web.Api.Models.Provinces;
 using Nwsdb.Web.Api.Models.RMOs;
+using Nwsdb.Web.Api.Models.WSSs;
 
 namespace Nwsdb.Web.Api.Services.Foundations.RMOs
 {
@@ -32,6 +33,24 @@ namespace Nwsdb.Web.Api.Services.Foundations.RMOs
         public IQueryable<Rmo> RetrieveAllRmos() =>
             TryCatch(() =>
                 this.storageBroker.SelectAllRmos());
+
+        public IQueryable<Rmo> RetreveAllRmosByrmoIdAndRscId(Guid rmoId, Guid rscId)
+        {
+            IQueryable<Rmo> rmos = this.storageBroker.SelectAllRmos();
+
+            rmos = rmos.Where(rmo => rmo.Id == rmoId && rmo.RscId == rscId);
+
+            return rmos;
+        }
+
+        public IQueryable<Rmo> RetreveAllRmosByRscId(Guid rscId)
+        {
+            IQueryable<Rmo> rmos = this.storageBroker.SelectAllRmos();
+
+            rmos = rmos.Where(rmo =>  rmo.RscId == rscId);
+
+            return rmos;
+        }
 
     }
 }

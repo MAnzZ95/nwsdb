@@ -1,0 +1,8 @@
+<mat-slide-toggle
+  [formControl]="valueControl"
+  [checked]="checked"
+  color="{{ switchbasecolor }}"
+  (change)="onValueChange($event)"
+  class="{{ switchbasestyle }}" style="margin-right: 10px;">
+  {{ labelValue }}
+</mat-slide-toggle>

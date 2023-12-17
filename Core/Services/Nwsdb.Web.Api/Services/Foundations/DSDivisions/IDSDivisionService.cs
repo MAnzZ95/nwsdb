@@ -12,5 +12,6 @@ namespace Nwsdb.Web.Api.Services.Foundations.DSDivisions
     public interface IDSDivisionService
     {
         IQueryable<DSDivision> RetrieveAllDSDivisions();
+        IQueryable<DSDivision> RetrieveAllDSDivisionsByDistrictId(Guid districtId);
     }
 }

@@ -7,8 +7,10 @@
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Nwsdb.Web.Api.Models.RMOs.Exceptions;
 using Nwsdb.Web.Api.Models.Users;
 using Nwsdb.Web.Api.Models.Users.Exceptions;
+using Nwsdb.Web.Api.Services.Foundations.RMOs;
 using Nwsdb.Web.Api.Services.Foundations.Users;
 using RESTFulSense.Controllers;
 
@@ -107,6 +109,24 @@ namespace Nwsdb.Web.Api.Controllers
             catch (UserValidationException userValidationException)
             {
                 return BadRequest(userValidationException.InnerException);
+            }
+            catch (UserServiceException userServiceException)
+            {
+                return InternalServerError(userServiceException);
+            }
+        }
+
+        [HttpGet("count")]
+        public ActionResult GetUsersCount()
+        {
+            try
+            {
+                int storageUsersCount = userService.RetrieveAllUsers().Count();
+                return Ok(storageUsersCount);
+            }
+            catch (UserDependencyException userDependencyException)
+            {
+                return InternalServerError(userDependencyException);
             }
             catch (UserServiceException userServiceException)
             {

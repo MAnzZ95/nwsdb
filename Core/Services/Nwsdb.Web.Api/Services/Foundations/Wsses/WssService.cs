@@ -32,5 +32,23 @@ namespace Nwsdb.Web.Api.Services.Foundations.Wsses
         public IQueryable<Wss> RetrieveAllWsses() =>
             TryCatch(() =>
                 this.storageBroker.SelectAllWsses());
+
+        public IQueryable<Wss> RetreveAllWssesByWssIdAndRmoId(Guid wssId, Guid rmoId)
+        {
+            IQueryable<Wss> wsses = this.storageBroker.SelectAllWsses();
+
+            wsses = wsses.Where(wss => wss.Id == wssId && wss.RmoId == rmoId);
+
+            return wsses;
+        }
+
+        public IQueryable<Wss> RetreveAllWssesByRmoId(Guid rmoId)
+        {
+            IQueryable<Wss> wsses = this.storageBroker.SelectAllWsses();
+
+            wsses = wsses.Where(wss => wss.RmoId == rmoId);
+
+            return wsses;
+        }
     }
 }

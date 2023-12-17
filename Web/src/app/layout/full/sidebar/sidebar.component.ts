@@ -14,7 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AppSidebarComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
-
+  isExpanded = false;
   private _mobileQueryListener: () => void;
 
   constructor(

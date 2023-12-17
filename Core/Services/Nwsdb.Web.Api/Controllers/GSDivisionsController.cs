@@ -35,7 +35,29 @@ namespace Nwsdb.Web.Api.Controllers
             {
                 IQueryable<GSDivision> storageLands =
                     this.gSDivisionService.RetrieveAllGSDivisions();
+
                 return Ok(storageLands);
+            }
+            catch (GSDivisionDependencyException landDependencyException)
+            {
+                return InternalServerError(landDependencyException);
+            }
+            catch (GSDivisionServiceException landServiceException)
+            {
+                return InternalServerError(landServiceException);
+            }
+        }
+
+
+        [HttpGet("{dsDivisionId}")]
+        public async ValueTask<ActionResult<IQueryable<GSDivision>>> GetAllGSDivisionsByDsDivisionId(Guid dsDivisionId)
+        {
+            try
+            {
+                IQueryable<GSDivision> storageGSDivisions =
+                    this.gSDivisionService.RetrieveAllGSDivisionsByDsDivisionId(dsDivisionId);
+
+                return Ok(storageGSDivisions);
             }
             catch (GSDivisionDependencyException landDependencyException)
             {

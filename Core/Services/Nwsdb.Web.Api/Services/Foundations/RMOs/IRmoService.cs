@@ -12,5 +12,7 @@ namespace Nwsdb.Web.Api.Services.Foundations.RMOs
     public interface IRmoService
     {
         IQueryable<Rmo> RetrieveAllRmos();
+        IQueryable<Rmo> RetreveAllRmosByrmoIdAndRscId(Guid rmoId, Guid rscId);
+        IQueryable<Rmo> RetreveAllRmosByRscId(Guid rscId);
     }
 }

@@ -14,6 +14,9 @@ using RESTFulSense.Controllers;
 using Nwsdb.Web.Api.Services.Foundations.RMOs;
 using Nwsdb.Web.Api.Models.RMOs;
 using Nwsdb.Web.Api.Models.RMOs.Exceptions;
+using Nwsdb.Web.Api.Models.Lands.Exceptions;
+using Nwsdb.Web.Api.Services.Foundations.Lands;
+using Nwsdb.Web.Api.Models.WSSs;
 
 namespace Nwsdb.Web.Api.Controllers
 {
@@ -29,12 +32,69 @@ namespace Nwsdb.Web.Api.Controllers
         }
 
         [HttpGet]
-        public async ValueTask<ActionResult<IQueryable<Rmo>>> GetAllOwnerShips()
+        public async ValueTask<ActionResult<IQueryable<Rmo>>> GetAllRmos()
         {
             try
             {
                 IQueryable<Rmo> storageRmos =
                     this.rmoService.RetrieveAllRmos();
+                return Ok(storageRmos);
+            }
+            catch (RmoDependencyException rmoDependencyException)
+            {
+                return InternalServerError(rmoDependencyException);
+            }
+            catch (RmoServiceException rmoServiceException)
+            {
+                return InternalServerError(rmoServiceException);
+            }
+        }
+
+        [HttpGet("count")]
+        public ActionResult GetRmosCount()
+        {
+            try
+            {
+                int storageRmoCount = rmoService.RetrieveAllRmos().Count();
+                return Ok(storageRmoCount);
+            }
+            catch (RmoDependencyException rmoDependencyException)
+            {
+                return InternalServerError(rmoDependencyException);
+            }
+            catch (RmoServiceException rmoServiceException)
+            {
+                return InternalServerError(rmoServiceException);
+            }
+        }
+
+        [HttpGet("{rmoId}/{rscId}")]
+        public async ValueTask<ActionResult<IQueryable<Rmo>>> GetAllRmosByrmoIdAndRscId(Guid rmoId, Guid rscId)
+        {
+            try
+            {
+                IQueryable<Rmo> storageRmos =
+                    this.rmoService.RetreveAllRmosByrmoIdAndRscId(rmoId, rscId);
+
+                return Ok(storageRmos);
+            }
+            catch (RmoDependencyException rmoDependencyException)
+            {
+                return InternalServerError(rmoDependencyException);
+            }
+            catch (RmoServiceException rmoServiceException)
+            {
+                return InternalServerError(rmoServiceException);
+            }
+        }
+
+        [HttpGet("{rscId}")]
+        public async ValueTask<ActionResult<IQueryable<Rmo>>> GetAllRmosByRscId(Guid rscId)
+        {
+            try
+            {
+                IQueryable<Rmo> storageRmos =
+                    this.rmoService.RetreveAllRmosByRscId(rscId);
                 return Ok(storageRmos);
             }
             catch (RmoDependencyException rmoDependencyException)

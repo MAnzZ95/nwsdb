@@ -1,0 +1,37 @@
+<div class="comman-delete-dialog">
+  <div mat-dialog-content>
+    <div class="flex">
+      <div>
+        <div class="attention-icon flex justify-center items-center">
+          <mat-icon color="warn" class="material-icons-round"
+            >warning_amber</mat-icon
+          >
+        </div>
+      </div>
+      <div>
+        <h6 class="d-flex">
+          Delete Record
+        </h6>
+        <p class="dits">
+          {{ deleteMessage }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-end dialog-footer">
+    <button
+      mat-flat-button
+      class="osos-button-close-popup form-control mr-5 px-5"
+      (click)="closePopup()">
+      <mat-icon class="material-icons-outlined">close</mat-icon>
+      Cancel
+    </button>
+    <app-button
+      lableValue="Delete"
+      Iconcss="btn-save-icon material-icons-outlined"
+      (click)="deleteRow()"
+      Buttoncss="btn-delete"
+      iconValue="delete_outline"></app-button>
+  </div>
+</div>

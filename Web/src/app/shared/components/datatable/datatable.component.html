@@ -1,0 +1,88 @@
+<table
+  mat-table
+  [dataSource]="dataSource"
+  matSort
+  class="common-table"
+  aria-describedby="app-datatable">
+  <ng-container
+    *ngFor="let column of tableColumns; let columnIndex = index"
+    matColumnDef="{{ column.columnDef }}">
+    <th mat-header-cell *matHeaderCellDef>
+      {{ column.header | translate }}
+    </th>
+
+    <td mat-cell *matCellDef="let element">
+      <ng-container
+        *ngIf="column.type === columnTypeEnum.Action; else nonAction">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <div *ngFor="let action of column.actions">
+            <button
+              *ngIf="checkAccess(grant.ReadOnly, action.menuId) | async"
+              type="button"
+              mat-menu-item
+              [ngClass]="action.Buttoncss"
+              (click)="actionEmitEvent(action.type, element.id)">
+              <mat-icon [ngClass]="action.Iconcss">{{
+                action.iconValue
+              }}</mat-icon>
+              <span> {{ action.lableValue | translate }} </span>
+            </button>
+          </div>
+        </mat-menu>
+      </ng-container>
+      <ng-template #nonAction>
+        <ng-container
+          *ngIf="column.type === columnTypeEnum.Status; else nonStatus">
+          <mat-label
+            class="table-label"
+            [ngClass]="selectStatusClass(column.cell(element))">
+            {{ column.cell(element) | enumToString: statusEnum | translate }}
+          </mat-label>
+        </ng-container>
+        <ng-template #nonStatus>
+          <ng-container
+            *ngIf="column.type === columnTypeEnum.Text; else nonText">
+            <div
+              matTooltip="{{ element.name }}"
+              matTooltipPosition="above"
+              [matTooltipDisabled]="element.name.length < 50">
+              {{ column.cell(element) | truncateText: 50 }}
+            </div>
+          </ng-container>
+          <ng-template #nonText>
+            <ng-container
+              *ngIf="column.type === columnTypeEnum.Date; else nonDate">
+              {{ column.cell(element) | timeZoneDate }}
+            </ng-container>
+            <ng-template #nonDate>
+              <ng-container>
+                {{ column.cell(element) }}
+              </ng-container>
+            </ng-template>
+          </ng-template>
+        </ng-template>
+      </ng-template>
+    </td>
+  </ng-container>
+
+  <tr
+    mat-header-row
+    *matHeaderRowDef="displayedColumns"
+    class="header-cell"></tr>
+
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+<div class="paginator">
+  <mat-paginator
+    [length]="pagination.totalPages"
+    [pageSize]="pagination.pageSize"
+    [pageSizeOptions]="pagination.pageSizeOptions"
+    (page)="pageChangeEmitEvent($event)"
+    [pageIndex]="pagination.currentPage - 1"
+    aria-label="Select page"
+    showFirstLastButtons>
+  </mat-paginator>
+</div>

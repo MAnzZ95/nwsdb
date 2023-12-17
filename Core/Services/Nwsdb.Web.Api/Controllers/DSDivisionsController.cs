@@ -5,15 +5,11 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
-
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Nwsdb.Web.Api.Models.Lands.Exceptions;
-using Nwsdb.Web.Api.Models.Lands;
 using RESTFulSense.Controllers;
-using Nwsdb.Web.Api.Services.Foundations.Lands;
 using Nwsdb.Web.Api.Services.Foundations.DSDivisions;
 using Nwsdb.Web.Api.Models.DSDevisions;
+using Nwsdb.Web.Api.Models.DSDivisions.Exceptions;
 
 namespace Nwsdb.Web.Api.Controllers
 {
@@ -33,17 +29,38 @@ namespace Nwsdb.Web.Api.Controllers
         {
             try
             {
-                IQueryable<DSDivision> storageLands =
+                IQueryable<DSDivision> storageDSDivisions =
                     this.dSDivisionService.RetrieveAllDSDivisions();
-                return Ok(storageLands);
+
+                return Ok(storageDSDivisions);
             }
-            catch (LandDependencyException landDependencyException)
+            catch (DSDivisionDependencyException dSDivisionDependencyException)
             {
-                return InternalServerError(landDependencyException);
+                return InternalServerError(dSDivisionDependencyException);
             }
-            catch (LandServiceException landServiceException)
+            catch (DSDivisionServiceException dSDivisionServiceException)
             {
-                return InternalServerError(landServiceException);
+                return InternalServerError(dSDivisionServiceException);
+            }
+        }
+
+        [HttpGet("{districtId}")]
+        public async ValueTask<ActionResult<IQueryable<DSDivision>>> GetAllDSDivisionsByDistrictId(Guid districtId)
+        {
+            try
+            {
+                IQueryable<DSDivision> storageDSDivisions =
+                    this.dSDivisionService.RetrieveAllDSDivisionsByDistrictId(districtId);
+
+                return Ok(storageDSDivisions);
+            }
+            catch (DSDivisionDependencyException dSDivisionDependencyException)
+            {
+                return InternalServerError(dSDivisionDependencyException);
+            }
+            catch (DSDivisionServiceException dSDivisionServiceException)
+            {
+                return InternalServerError(dSDivisionServiceException);
             }
         }
     }
