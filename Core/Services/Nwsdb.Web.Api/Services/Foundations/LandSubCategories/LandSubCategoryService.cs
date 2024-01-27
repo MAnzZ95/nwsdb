@@ -9,19 +9,17 @@ using Nwsdb.Web.Api.Brokers.DateTimes;
 using Nwsdb.Web.Api.Brokers.Loggings;
 using Nwsdb.Web.Api.Brokers.Storages;
 using Nwsdb.Web.Api.Models.Lands;
-using Nwsdb.Web.Api.Models.LandTypes;
-using Nwsdb.Web.Api.Models.Users;
+using Nwsdb.Web.Api.Models.LandSubCategories;
 
-namespace Nwsdb.Web.Api.Services.Foundations.LandTypes
+namespace Nwsdb.Web.Api.Services.Foundations.LandSubCategories
 {
-    public partial class LandTypeService : ILandTypeService
+    public class LandSubCategoryService : ILandSubCategoryService
     {
-
         private readonly IStorageBroker storageBroker;
         private readonly ILoggingBroker loggingBroker;
         private readonly IDateTimeBroker dateTimeBroker;
 
-        public LandTypeService(
+        public LandSubCategoryService(
             IStorageBroker storageBroker,
             ILoggingBroker loggingBroker,
             IDateTimeBroker dateTimeBroker)
@@ -31,32 +29,7 @@ namespace Nwsdb.Web.Api.Services.Foundations.LandTypes
             this.dateTimeBroker = dateTimeBroker;
         }
 
-        public IQueryable<LandType> RetrieveAllLandTypes() =>
-            TryCatch(() =>
-                this.storageBroker.SelectAllLandTypes());
-
-        public ValueTask<LandType> AddLandTypeAsync(LandType landType) =>
-           TryCatch(async () =>
-           {
-               ValidateLandTypeOnAdd(landType);
-
-               return await this.storageBroker.InserLandTypeAsync(landType);
-           });
-
-        public ValueTask<LandType> RetrieveLandTypeById(Guid id) =>
-            TryCatch(async () =>
-            {
-                ValidateLandTypeId(id);
-
-                return await this.storageBroker.SelectLandTypeById(id);
-            });
-
-        public ValueTask<LandType> ModifyLandTypeAsync(LandType landType) =>
-            TryCatch(async () =>
-            {
-                ValidateLandTypeOnAdd(landType);
-
-                return await this.storageBroker.UpdateLandTypeAsync(landType);
-            });
+        public IQueryable<LandSubCategory> RetrieveAllLandSubCategories() =>
+                this.storageBroker.SelectAllLandSubCategories();
     }
 }

@@ -1,10 +1,17 @@
 using FluentAssertions.Common;
+using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 using Nwsdb.Web.Api.Brokers.DateTimes;
 using Nwsdb.Web.Api.Brokers.Loggings;
 using Nwsdb.Web.Api.Brokers.Storages;
 using Nwsdb.Web.Api.Services.Foundations.Districts;
+using Nwsdb.Web.Api.Services.Foundations.DSDivisions;
+using Nwsdb.Web.Api.Services.Foundations.GSDivisions;
 using Nwsdb.Web.Api.Services.Foundations.Lands;
+using Nwsdb.Web.Api.Services.Foundations.LandSubCategories;
+using Nwsdb.Web.Api.Services.Foundations.LandTypes;
+using Nwsdb.Web.Api.Services.Foundations.OwnerShips;
+using Nwsdb.Web.Api.Services.Foundations.Provinces;
 using Nwsdb.Web.Api.Services.Foundations.RMOs;
 using Nwsdb.Web.Api.Services.Foundations.RSCs;
 using Nwsdb.Web.Api.Services.Foundations.Users;
@@ -27,9 +34,13 @@ builder.Services.AddTransient<IDistrictService, DistrictService>();
 builder.Services.AddTransient<IRscService, RscService>();
 builder.Services.AddTransient<IRmoService, RmoService>();
 builder.Services.AddTransient<IWssService, WssService>();
-builder.Services.AddTransient<IUserService, UserService>();
-
-
+builder.Services.AddTransient<IProvinceService, ProvinceService>();
+builder.Services.AddTransient<IDSDivisionService, DSDivisionService>();
+builder.Services.AddTransient<IGSDivisionService, GSDivisionService>();
+builder.Services.AddTransient<IOwnerShipService, OwnerShipService>();
+builder.Services.AddTransient<IUserTypeService,UserTypeService>();
+builder.Services.AddTransient<ILandTypeService, LandTypeService>();
+builder.Services.AddTransient<ILandSubCategoryService, LandSubCategoryService>();
 
 builder.Services.AddCors(options =>
 {
@@ -49,6 +60,8 @@ builder.Services.AddControllersWithViews()
 );
 
 builder.Services.AddControllers();
+//builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntit
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

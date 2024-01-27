@@ -9,6 +9,8 @@ using Nwsdb.Web.Api.Brokers.DateTimes;
 using Nwsdb.Web.Api.Brokers.Loggings;
 using Nwsdb.Web.Api.Brokers.Storages;
 using Nwsdb.Web.Api.Models.Lands;
+using Nwsdb.Web.Api.Models.RSCs;
+using System.Security.Cryptography;
 
 namespace Nwsdb.Web.Api.Services.Foundations.Lands
 {
@@ -31,8 +33,14 @@ namespace Nwsdb.Web.Api.Services.Foundations.Lands
         public ValueTask<Land> AddLandAsync(Land land) =>
             TryCatch(async () =>
             {
-                ValidateLandOnAdd(land);
+                land.Id = Guid.NewGuid();
+                land.CreatedDate = DateTime.UtcNow;
+                land.UpdatedDate = DateTime.UtcNow;
+                land.CreatedBy = Guid.Parse("67fe9d83-18db-4b45-bf2e-e56a3f996a81");
+                land.UpdatedBy = Guid.Parse("67fe9d83-18db-4b45-bf2e-e56a3f996a81");
 
+                ValidateLandOnAdd(land);    
+                
                 return await this.storageBroker.InserLandAsync(land);
             });
 
@@ -52,6 +60,11 @@ namespace Nwsdb.Web.Api.Services.Foundations.Lands
             TryCatch(async () =>
             {
                 ValidateLandOnAdd(land);
+                Land maybeLand = await storageBroker.SelectLandById(land.Id);
+                land.UpdatedDate = DateTime.UtcNow;
+                land.CreatedBy = maybeLand.CreatedBy;
+                land.CreatedDate = maybeLand.CreatedDate;
+                land.UpdatedBy = Guid.Parse("67fe9d83-18db-4b45-bf2e-e56a3f996a81");
 
                 return await this.storageBroker.UpdateLandAsync(land);
             });

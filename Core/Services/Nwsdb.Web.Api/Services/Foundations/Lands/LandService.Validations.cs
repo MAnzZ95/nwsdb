@@ -19,8 +19,7 @@ namespace Nwsdb.Web.Api.Services.Foundations.Lands
                 (Rule: IsInvalid(land.Id), Parameter: nameof(Land.Id)),
                 (Rule: IsInvalid(land.Address), Parameter: nameof(Land.Address)),
                 (Rule: IsInvalid(land.LandName), Parameter: nameof(Land.LandName)),
-                (Rule: IsInvalid(land.DistricId), Parameter: nameof(Land.DistricId)),
-                (Rule: IsInvalid(land.SubCategoryId), Parameter: nameof(Land.SubCategoryId))
+                (Rule: IsInvalid(land.DistricId), Parameter: nameof(Land.DistricId))
                 );
         }
 

@@ -17,6 +17,7 @@ using Nwsdb.Web.Api.Models.RMOs.Exceptions;
 using Nwsdb.Web.Api.Models.Lands.Exceptions;
 using Nwsdb.Web.Api.Services.Foundations.Lands;
 using Nwsdb.Web.Api.Models.WSSs;
+using Nwsdb.Web.Api.Models.RSCs;
 
 namespace Nwsdb.Web.Api.Controllers
 {
@@ -104,6 +105,53 @@ namespace Nwsdb.Web.Api.Controllers
             catch (RmoServiceException rmoServiceException)
             {
                 return InternalServerError(rmoServiceException);
+            }
+        }
+
+        [HttpPut]
+        public async ValueTask<ActionResult<Rmo>> PutRmoAsync(Rmo rmo)
+        {
+            try
+            {
+                Rmo modifiedRmo =
+                    await this.rmoService.ModifyRmoAsync(rmo);
+                return Ok(modifiedRmo);
+            }
+            catch (DistrictValidationException companyValidationException)
+                when (companyValidationException.InnerException is NotFoundLandException)
+            {
+                return NotFound(companyValidationException.InnerException);
+            }
+            catch (DistrictValidationException companyValidationException)
+            {
+                return BadRequest(companyValidationException.InnerException);
+            }
+            catch (LandServiceException landServiceException)
+            {
+                return InternalServerError(landServiceException);
+            }
+        }
+
+        [HttpPost]
+        public async ValueTask<ActionResult<Rmo>> PostRmoAsync(Rmo rmo)
+        {
+            try
+            {
+                var addedRmo = await this.rmoService.AddRmoAsync(rmo);
+
+                return Ok(addedRmo);
+            }
+            catch (DistrictValidationException landValidationException)
+            {
+                return BadRequest(landValidationException.InnerException);
+            }
+            catch (LandDependencyException landDependencyException)
+            {
+                return InternalServerError(landDependencyException);
+            }
+            catch (LandServiceException landServiceException)
+            {
+                return InternalServerError(landServiceException);
             }
         }
     }

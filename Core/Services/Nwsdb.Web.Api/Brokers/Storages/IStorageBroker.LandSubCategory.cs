@@ -5,18 +5,12 @@
 // explicit written authorization from NWSDB ------------------------------------------
 //-------------------------------------------------------------------------------------
 
-using Nwsdb.Web.Api.Models.WSSs;
+using Nwsdb.Web.Api.Models.LandSubCategories;
 
-namespace Nwsdb.Web.Api.Services.Foundations.Wsses
+namespace Nwsdb.Web.Api.Brokers.Storages
 {
-    public interface IWssService
+    public partial interface IStorageBroker
     {
-        IQueryable<Wss> RetrieveAllWsses();
-        IQueryable<Wss> RetreveAllWssesByWssIdAndRmoId(Guid wssId, Guid rmoId);
-        IQueryable<Wss> RetreveAllWssesByRmoId(Guid rmoId);
-        ValueTask<Wss> RemoveWssById(Guid id);
-        ValueTask<Wss> AddWssAsync(Wss wss);
-        ValueTask<Wss> ModifyWssAsync(Wss wss);
-        ValueTask<Wss> RetriveWssById(Guid id);
+        IQueryable<LandSubCategory> SelectAllLandSubCategories();
     }
 }
