@@ -8,12 +8,16 @@ import { RscListComponent } from "./list/list.component";
 import { RscNewComponent } from "./new/new.component";
 import { RscComponent } from "./rsc.component";
 import { routes } from "./rsc.routing";
+import { RscDetailsComponent } from "./details/details.component";
+import { RscViewComponent } from "./details/view/view.component";
 
 @NgModule({
     declarations: [
      RscListComponent,
      RscComponent,
-     RscNewComponent
+     RscNewComponent,
+     RscDetailsComponent,
+     RscViewComponent
     ],
     imports: [
       RouterModule.forChild(routes),

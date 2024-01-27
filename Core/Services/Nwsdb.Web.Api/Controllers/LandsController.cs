@@ -52,7 +52,8 @@ namespace Nwsdb.Web.Api.Controllers
         {
             try
             {
-                var retrivedLand = await this.landService.RetrieveLandById(id);
+                Land retrivedLand = await this.landService.RetrieveLandById(id);
+
                 return Ok(retrivedLand);
             }
             catch(DistrictValidationException landValidationException) 

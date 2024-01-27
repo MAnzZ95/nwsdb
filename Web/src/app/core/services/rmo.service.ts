@@ -13,8 +13,8 @@ export class RmoService {
 
   private apiUrl =`${this.config.apiUrl}/api/rmos`;
 
-  getRmoDetails(): Observable<Rmo> {
-    return this.httpClient.get<Rmo>(`${this.apiUrl}`);
+  getRmoDetails(): Observable<Rmo[]> {
+    return this.httpClient.get<Rmo[]>(`${this.apiUrl}`);
   }
 
   getRmoDetailsWithOData(
@@ -41,5 +41,9 @@ export class RmoService {
 
   removeRmo(rmoId: string): Observable<Rmo> {
     return this.httpClient.delete<Rmo>(`${this.apiUrl}/${rmoId}`);
+  }
+
+  getRmoDetailsByRscId(rscId: string): Observable<Rmo[]>{
+    return this.httpClient.get<Rmo[]>(`${this.apiUrl}/${rscId}`);
   }
 }

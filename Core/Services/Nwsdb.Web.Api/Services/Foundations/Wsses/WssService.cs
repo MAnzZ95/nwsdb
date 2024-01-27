@@ -8,6 +8,7 @@
 using Nwsdb.Web.Api.Brokers.DateTimes;
 using Nwsdb.Web.Api.Brokers.Loggings;
 using Nwsdb.Web.Api.Brokers.Storages;
+using Nwsdb.Web.Api.Models.RMOs;
 using Nwsdb.Web.Api.Models.RSCs;
 using Nwsdb.Web.Api.Models.WSSs;
 
@@ -49,6 +50,46 @@ namespace Nwsdb.Web.Api.Services.Foundations.Wsses
             wsses = wsses.Where(wss => wss.RmoId == rmoId);
 
             return wsses;
+        }
+
+        public async ValueTask<Wss> RetriveWssById(Guid id)
+        {
+            return await this.storageBroker.SelectWssById(id);
+        }
+
+        public async ValueTask<Wss> ModifyWssAsync(Wss wss)
+        {
+            Wss maybeWss = await storageBroker.SelectWssById(wss.Id);
+            wss.UpdatedDate = DateTime.UtcNow;
+            wss.CreatedBy = maybeWss.CreatedBy;
+            wss.CreatedDate = maybeWss.CreatedDate;
+            wss.UpdatedBy = Guid.Parse("67fe9d83-18db-4b45-bf2e-e56a3f996a81");
+
+            return await this.storageBroker.UpdateWssAsync(wss);
+        }
+
+        public async ValueTask<Wss> AddWssAsync(Wss wss)
+        {
+            wss.Id = Guid.NewGuid();
+            wss.CreatedDate = DateTime.UtcNow;
+            wss.UpdatedDate = DateTime.UtcNow;
+            wss.CreatedBy = Guid.Parse("67fe9d83-18db-4b45-bf2e-e56a3f996a81");
+            wss.UpdatedBy = Guid.Parse("67fe9d83-18db-4b45-bf2e-e56a3f996a81");
+
+            return await this.storageBroker.InsertWssAsync(wss);
+        }
+
+        public async ValueTask<Wss> RemoveWssById(Guid id)
+        {
+            Wss maybeWss = await this.storageBroker.SelectWssById(id);
+
+            if (maybeWss != null)
+            {
+                maybeWss.Status = WssStatus.Removed;
+                maybeWss.UpdatedDate = DateTimeOffset.UtcNow;
+            }
+
+            return await this.storageBroker.UpdateWssAsync(maybeWss);
         }
     }
 }

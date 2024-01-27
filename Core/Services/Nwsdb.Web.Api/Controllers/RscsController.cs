@@ -16,6 +16,8 @@ using Nwsdb.Web.Api.Models.RSCs;
 using Nwsdb.Web.Api.Models.RSCs.Exceptions;
 using Nwsdb.Web.Api.Models.RMOs.Exceptions;
 using Nwsdb.Web.Api.Services.Foundations.RMOs;
+using Nwsdb.Web.Api.Models.Lands.Exceptions;
+using Nwsdb.Web.Api.Models.Lands;
 
 namespace Nwsdb.Web.Api.Controllers
 {
@@ -66,5 +68,54 @@ namespace Nwsdb.Web.Api.Controllers
                 return InternalServerError(rscServiceException);
             }
         }
+
+        [HttpPut]
+        public async ValueTask<ActionResult<Rsc>> PutRscAsync(Rsc rsc)
+        {
+            try
+            {
+                Rsc modifiedRsc =
+                    await this.rscService.ModifyRscAsync(rsc);
+                return Ok(modifiedRsc);
+            }
+            catch (DistrictValidationException companyValidationException)
+                when (companyValidationException.InnerException is NotFoundLandException)
+            {
+                return NotFound(companyValidationException.InnerException);
+            }
+            catch (DistrictValidationException companyValidationException)
+            {
+                return BadRequest(companyValidationException.InnerException);
+            }
+            catch (LandServiceException landServiceException)
+            {
+                return InternalServerError(landServiceException);
+            }
+        }
+
+        [HttpPost]
+        public async ValueTask<ActionResult<Rsc>> PostRscAsync(Rsc rsc)
+        {
+            try
+            {
+                var addedRsc = await this.rscService.AddRscAsync(rsc);
+
+                return Ok(addedRsc);
+            }
+            catch (DistrictValidationException landValidationException)
+            {
+                return BadRequest(landValidationException.InnerException);
+            }
+            catch (LandDependencyException landDependencyException)
+            {
+                return InternalServerError(landDependencyException);
+            }
+            catch (LandServiceException landServiceException)
+            {
+                return InternalServerError(landServiceException);
+            }
+        }
+
+
     }
 }

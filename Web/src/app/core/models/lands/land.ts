@@ -22,4 +22,6 @@ export interface Land extends BaseEntity{
     longitude: string;
     landStatus: LandStatus;
     landAprovalStatus: LandAprovalStatus;
+    isLegal: boolean;
+    remark: string;
 }

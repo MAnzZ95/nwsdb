@@ -14,8 +14,8 @@ export class ProvinceService {
 
   private apiUrl =`${this.config.apiUrl}/api/provinces`;
 
-  getProvinceDetails(): Observable<Province> {
-    return this.httpClient.get<Province>(`${this.apiUrl}`);
+  getProvinceDetails(): Observable<Province[]> {
+    return this.httpClient.get<Province[]>(`${this.apiUrl}`);
   }
 
   getProvinceDetailsWithOData(

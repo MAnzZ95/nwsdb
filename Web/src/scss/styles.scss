@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+@import '_variables.scss';
+@import '_custommaterial.scss';
+@import '_meterial-icons.scss';
+@import '_media-query.scss';
+.blue-color {
+  color: $blue !important;
+}
+.gray-color {
+  color: $gray !important;
+}
+.white-color {
+  color: $white !important;
+}
+.black-color {
+  color: $black !important;
+}
+.red-color {
+  color: $red !important;
+}
+.blue-bgcolor {
+  background: $blue !important;
+}
+.gray-bgcolor {
+  background: $gray !important;
+}
+.white-bgcolor {
+  background: $white !important;
+}
+.red-bgcolor {
+  background: $red !important;
+}
+.green-bgcolor {
+  background: $green !important;
+}
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: $input-color;
+}
+.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: $input-error-color;
+}
+

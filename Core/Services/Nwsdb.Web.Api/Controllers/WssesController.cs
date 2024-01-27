@@ -16,6 +16,8 @@ using Nwsdb.Web.Api.Models.WSSs;
 using Nwsdb.Web.Api.Models.WSSs.Exceptions;
 using Nwsdb.Web.Api.Models.Users.Exceptions;
 using Nwsdb.Web.Api.Services.Foundations.Users;
+using Nwsdb.Web.Api.Models.RMOs.Exceptions;
+using Nwsdb.Web.Api.Models.RMOs;
 
 namespace Nwsdb.Web.Api.Controllers
 {
@@ -104,6 +106,78 @@ namespace Nwsdb.Web.Api.Controllers
             catch (WssServiceException WssServiceException)
             {
                 return InternalServerError(WssServiceException);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async ValueTask<ActionResult<Wss>> GetWssById(Guid id)
+        {
+            try
+            {
+                Wss retrivedWss = await this.wssService.RetriveWssById(id);
+
+                return Ok(retrivedWss);
+            }
+            catch (DistrictValidationException landValidationException)
+                when (landValidationException.InnerException is NotFoundLandException)
+            {
+                return NotFound(landValidationException.InnerException);
+            }
+            catch (DistrictValidationException landValidationException)
+            {
+                return NotFound(landValidationException.InnerException);
+            }
+            catch (LandDependencyException landDependencyException)
+            {
+                return InternalServerError(landDependencyException);
+            }
+        }
+
+        [HttpPut]
+        public async ValueTask<ActionResult<Wss>> PutRmoAsync(Wss wss)
+        {
+            try
+            {
+                Wss modifiedWss =
+                    await this.wssService.ModifyWssAsync(wss);
+
+                return Ok(modifiedWss);
+            }
+            catch (DistrictValidationException companyValidationException)
+                when (companyValidationException.InnerException is NotFoundLandException)
+            {
+                return NotFound(companyValidationException.InnerException);
+            }
+            catch (DistrictValidationException companyValidationException)
+            {
+                return BadRequest(companyValidationException.InnerException);
+            }
+            catch (LandServiceException landServiceException)
+            {
+                return InternalServerError(landServiceException);
+            }
+        }
+
+        [HttpPost]
+        public async ValueTask<ActionResult<Wss>> PostRmoAsync(Wss wss)
+        {
+            try
+            {
+                var addedWss = await this.wssService.AddWssAsync(wss);
+
+                return Ok(addedWss);
+            }
+            catch (DistrictValidationException landValidationException)
+            {
+                return BadRequest(landValidationException.InnerException);
+            }
+            catch (LandDependencyException landDependencyException)
+            {
+                return InternalServerError(landDependencyException);
+            }
+            catch (LandServiceException landServiceException)
+            {
+                return InternalServerError(landServiceException);
             }
         }
     }

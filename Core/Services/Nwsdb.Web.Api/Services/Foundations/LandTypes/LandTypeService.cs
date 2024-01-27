@@ -14,7 +14,7 @@ using Nwsdb.Web.Api.Models.Users;
 
 namespace Nwsdb.Web.Api.Services.Foundations.LandTypes
 {
-    public partial class LandTypeService
+    public partial class LandTypeService : ILandTypeService
     {
 
         private readonly IStorageBroker storageBroker;

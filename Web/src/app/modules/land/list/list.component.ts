@@ -130,6 +130,10 @@ export class LandsListComponent implements OnInit, OnDestroy {
     this.subscription.add(sub);
   }
 
+  viewClick(element: Land) {
+    const breadcrumbName = element?.id;
+  }
+
   getColumnDetails() {
     // this.columnDetailsService
     //   .getUserProfileColumnDetails()

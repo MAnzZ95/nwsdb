@@ -13,8 +13,8 @@ export class RscService {
 
   private apiUrl =`${this.config.apiUrl}/api/rscs`;
 
-  getRscDetails(): Observable<Rsc> {
-    return this.httpClient.get<Rsc>(`${this.apiUrl}`);
+  getRscDetails(): Observable<Rsc[]> {
+    return this.httpClient.get<Rsc[]>(`${this.apiUrl}`);
   }
 
   getRscDetailsWithOData(

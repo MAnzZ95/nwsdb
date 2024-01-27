@@ -29,6 +29,7 @@ export class LandService {
   }
 
   createLand(land: Land): Observable<Land>{
+    console.log(land);
     return this.httpClient.post<Land>(`${this.apiUrl}`,land);
   }
 
@@ -37,6 +38,7 @@ export class LandService {
   }
 
   getLandsCount(): Observable<number>{
+    console.log(this.apiUrl);
     return this.httpClient.get<number>(`${this.apiUrl}/count`);
   }
 

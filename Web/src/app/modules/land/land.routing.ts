@@ -4,6 +4,7 @@ import { LandComponent } from './land.component';
 import { NewLandComponent } from './new/new.component';
 import { LandViewComponent } from './details/view/view.component';
 import { LandEditComponent } from './details/edit/edit.component';
+import { LandDetailsComponent } from './details/details.component';
 
 export const routes: Route[] = [
   {
@@ -21,7 +22,7 @@ export const routes: Route[] = [
       },
       {
         path: ':id',
-        component: LandsListComponent,
+        component: LandDetailsComponent,
         children: [
           {
             path: '',

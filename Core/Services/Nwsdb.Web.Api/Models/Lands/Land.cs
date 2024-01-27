@@ -30,6 +30,8 @@ namespace Nwsdb.Web.Api.Models.Lands
         public string? Address { get; set; }
         public string? Latitude { get; set; }
         public string? Longitude { get; set; }
+        public bool IsLegal { get; set; }
+        public string? Remark { get; set; }
         public LandStatus? LandStatus { get; set; }
         public LandAprovalStatus? LandAprovalStatus { get;set; }
         public DateTimeOffset CreatedDate { get; set; }

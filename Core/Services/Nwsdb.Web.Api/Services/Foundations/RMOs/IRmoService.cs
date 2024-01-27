@@ -14,5 +14,9 @@ namespace Nwsdb.Web.Api.Services.Foundations.RMOs
         IQueryable<Rmo> RetrieveAllRmos();
         IQueryable<Rmo> RetreveAllRmosByrmoIdAndRscId(Guid rmoId, Guid rscId);
         IQueryable<Rmo> RetreveAllRmosByRscId(Guid rscId);
+        ValueTask<Rmo> RemoveRmoById(Guid id);
+        ValueTask<Rmo> AddRmoAsync(Rmo rmo);
+        ValueTask<Rmo> ModifyRmoAsync(Rmo rmo);
+        ValueTask<Rmo> RetriveRmoById(Guid id);
     }
 }
