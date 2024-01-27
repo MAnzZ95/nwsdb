@@ -14,8 +14,8 @@ export class DistrictService {
 
   private apiUrl =`${this.config.apiUrl}/api/districts`;
 
-  getDistrictDetails(): Observable<District> {
-    return this.httpClient.get<District>(`${this.apiUrl}`);
+  getDistrictDetails(): Observable<District[]> {
+    return this.httpClient.get<District[]>(`${this.apiUrl}`);
   }
 
   getDistrictDetailsWithOData(
@@ -42,5 +42,9 @@ export class DistrictService {
 
   removeDistrict(districtId: string): Observable<District> {
     return this.httpClient.delete<District>(`${this.apiUrl}/${districtId}`);
+  }
+
+  getDistrictDetailsByProvinceId(provinceId: string): Observable<District[]>{
+    return this.httpClient.get<District[]>(`${this.apiUrl}/${provinceId}`);
   }
 }

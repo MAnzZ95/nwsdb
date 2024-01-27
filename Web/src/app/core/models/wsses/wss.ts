@@ -3,7 +3,7 @@ import { WssStatus } from "./wss-status";
 
 export interface Wss extends BaseEntity{
     id: string;
-    rmoNumber: string;
+    wssNumber: string;
     name: string;
     address: string;
     mobile: string;

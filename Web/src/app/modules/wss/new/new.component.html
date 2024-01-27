@@ -1,1 +1,147 @@
-<p>new works!</p>
+<div class="col-12">
+    <form [formGroup]="inputForm" (ngSubmit)="saveWss()">
+        <mat-toolbar class="sub-header" style="margin-bottom: 5px;">
+          <div class="breadcrumb d-flex">
+            <span style="font-size: medium;">Rscs / </span>
+            <span style="font-size: medium;"> New</span>
+          </div>
+
+          <div style="position: absolute; right: 20px;">
+            <app-switchbase
+              class="checkbox mt-3  mr-5"
+              switchbasecolor="worm"
+              switchbasestyle="swichbase-customize-Style"
+              (valueChange)="onActiveStatusChange($event)"
+              [labelValue]="'Active'"
+              [checked]="true" />
+            <app-button
+              buttonType="button"
+              [lableValue]="'Cancel'"
+              Iconcss="btn-view-icon material-icons-outlined"
+              Buttoncss="btn-view"
+              iconValue="cancel"
+              class="mr-4"
+              style="margin-right: 20px;"
+              (buttonClicked)="onCancel()" />
+            <app-button
+              [lableValue]="'Save'"
+              Iconcss="btn-save-icon material-icons-outlined"
+              Buttoncss="btn-save"
+              iconValue="save" />
+          </div>
+        </mat-toolbar>
+
+        <div style="margin-bottom: 5px;">
+            <div >
+              <div fxLayout="row">
+                <mat-accordion>
+                  <mat-expansion-panel
+                    (opened)="(true)"
+                    (closed)="(false)"
+                    [expanded]="true">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>{{
+                        'Basic Details'
+                      }}</mat-panel-title>
+                    </mat-expansion-panel-header>
+  
+                      <mat-grid-list rowHeight="75px" cols="12">
+                        <mat-grid-tile colspan="3">
+                          <mat-form-field class="form-control">
+                            <mat-label>{{
+                              'Rsc Name'
+                            }}</mat-label>
+                            <input
+                              type="text"
+                              id="rscName"
+                              class="form-control"
+                              matInput
+                              placeholder="CAMP-1234"
+                              formControlName="rscName" />
+                            <!-- <mat-error
+                              *ngIf="
+                                !inputForm.get('basicDetail.companyId')?.valid &&
+                                inputForm.get('basicDetail.companyId')?.touched
+                              ">
+                              {{ getCompanyIdErrorMessage() }}
+                            </mat-error> -->
+                          </mat-form-field>
+                        </mat-grid-tile>
+  
+                        <mat-grid-tile colspan="3">
+                          <mat-form-field class="form-control">
+                            <mat-label>{{
+                              'Rsc Number'
+                            }}</mat-label>
+                            <input
+                              type="text"
+                              id="rscNumber"
+                              class="form-control"
+                              matInput
+                              placeholder="RCS0001"
+                              formControlName="rscNumber" />
+                            <!-- <mat-error
+                              *ngIf="
+                                !inputForm.get('basicDetail.companyId')?.valid &&
+                                inputForm.get('basicDetail.companyId')?.touched
+                              ">
+                              {{ getCompanyIdErrorMessage() }}
+                            </mat-error> -->
+                          </mat-form-field>
+                        </mat-grid-tile>
+  
+                        <mat-grid-tile colspan="3">
+                          <mat-form-field class="form-control">
+                            <mat-label>{{
+                              'Phone'
+                            }}</mat-label>
+                            <input
+                              type="text"
+                              id="phone"
+                              class="form-control"
+                              matInput
+                              placeholder="+943232535"
+                              formControlName="phone" />
+                            <!-- <mat-error
+                              *ngIf="
+                                !inputForm.get('basicDetail.companyId')?.valid &&
+                                inputForm.get('basicDetail.companyId')?.touched
+                              ">
+                              {{ getCompanyIdErrorMessage() }}
+                            </mat-error> -->
+                          </mat-form-field>
+                        </mat-grid-tile>
+                      </mat-grid-list>
+  
+                      <mat-grid-list rowHeight="75px" cols="1">
+                        <mat-grid-tile>
+                          <mat-form-field class="form-control">
+                            <mat-label>{{
+                              'Address'
+                            }}</mat-label>
+                            <input
+                              type="text"
+                              id="address"
+                              class="form-control"
+                              matInput
+                              placeholder="address"
+                              formControlName="address" />
+                            <!-- <mat-error
+                              *ngIf="
+                                !inputForm.get('basicDetail.companyId')?.valid &&
+                                inputForm.get('basicDetail.companyId')?.touched
+                              ">
+                              {{ getCompanyIdErrorMessage() }}
+                            </mat-error> -->
+                          </mat-form-field>
+                        </mat-grid-tile>
+                      </mat-grid-list>
+                      
+  
+                  </mat-expansion-panel>
+                </mat-accordion>
+              </div>
+            </div>
+          </div>
+    </form>
+</div>

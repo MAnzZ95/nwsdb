@@ -12,10 +12,10 @@ export class DsDivisionService {
   private config = inject(AppConfigService);
   private httpClient = inject(HttpClient);
 
-  private apiUrl =`${this.config.apiUrl}/api/lands`;
+  private apiUrl =`${this.config.apiUrl}/api/dsdivisions`;
 
-  getDSDivisionDetails(): Observable<DsDivision> {
-    return this.httpClient.get<DsDivision>(`${this.apiUrl}`);
+  getDSDivisionDetails(): Observable<DsDivision[]> {
+    return this.httpClient.get<DsDivision[]>(`${this.apiUrl}`);
   }
 
   getDSDivisionDetailsWithOData(
@@ -42,5 +42,9 @@ export class DsDivisionService {
 
   removeDSDivision(dsDivisionId: string): Observable<DsDivision> {
     return this.httpClient.delete<DsDivision>(`${this.apiUrl}/${dsDivisionId}`);
+  }
+
+  getDsDivisionDetailsByDistrictId(districtId: string): Observable<DsDivision[]>{
+    return this.httpClient.get<DsDivision[]>(`${this.apiUrl}/${districtId}`);
   }
 }

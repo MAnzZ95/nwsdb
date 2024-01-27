@@ -15,7 +15,9 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutes } from './app.routing';
 import { AppConfigService } from './app-config.service';
-import { initializeKeycloak } from './core/utils/app.init';
+import { initializeApp } from './core/utils/app.init';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { AuthGuard } from './core/utils/app.guard';
 
 @NgModule({
     declarations: [
@@ -25,6 +27,7 @@ import { initializeKeycloak } from './core/utils/app.init';
         AppHeaderComponent
     ],
     providers: [
+        AuthGuard,
         AppConfigService,
         {
             provide: LocationStrategy,
@@ -32,17 +35,17 @@ import { initializeKeycloak } from './core/utils/app.init';
         },
         {
             provide: APP_INITIALIZER,
-            useFactory:initializeKeycloak,
+            useFactory:initializeApp,
             multi:true,
             deps:[HttpClient,AppConfigService]
         }
-    ],
-    bootstrap: [AppComponent],
+    ],    
     exports: [RouterModule],
     imports: [
         HttpClientModule,
         RouterModule,
         AppRoutingModule,
+        KeycloakAngularModule,
         NoopAnimationsModule,
         DemoMaterialModule,
         SharedModule,
@@ -50,6 +53,7 @@ import { initializeKeycloak } from './core/utils/app.init';
         RouterModule.forRoot(AppRoutes),
         BrowserModule,
         BrowserAnimationsModule,
-    ]
+    ],
+    bootstrap: [AppComponent],
 })
 export class AppModule { }

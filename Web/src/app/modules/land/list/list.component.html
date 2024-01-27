@@ -23,7 +23,8 @@
               <button
                 mat-menu-item
                 [routerLink]="element.id"
-                [disabled]="element.isDeleted">
+                [disabled]="element.isDeleted"
+                (click)="viewClick(element)">
                 <mat-icon class="material-icons-outlined">visibility</mat-icon>
                 <span>View</span>
               </button>

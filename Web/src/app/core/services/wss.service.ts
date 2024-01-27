@@ -13,8 +13,8 @@ export class WssService {
 
   private apiUrl =`${this.config.apiUrl}/api/wsses`;
 
-  getWssDetails(): Observable<Wss> {
-    return this.httpClient.get<Wss>(`${this.apiUrl}`);
+  getWssDetails(): Observable<Wss[]> {
+    return this.httpClient.get<Wss[]>(`${this.apiUrl}`);
   }
 
   getWssDetailsWithOData(
@@ -41,5 +41,9 @@ export class WssService {
 
   removeWss(wssId: string): Observable<Wss> {
     return this.httpClient.delete<Wss>(`${this.apiUrl}/${wssId}`);
+  }
+
+  getWssDetailsByRmoId(rmoId: string): Observable<Wss[]>{
+    return this.httpClient.get<Wss[]>(`${this.apiUrl}/${rmoId}`);
   }
 }

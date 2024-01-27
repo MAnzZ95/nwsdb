@@ -1,5 +1,5 @@
 <div class="col-12">
-    <form [formGroup]="inputForm" (ngSubmit)="saveCompany()">
+    <form [formGroup]="inputForm" (ngSubmit)="saveLand()">
         <mat-toolbar class="sub-header" style="margin-bottom: 5px;">
           <div class="breadcrumb d-flex">
             <span style="font-size: medium;">Lands / </span>
@@ -121,6 +121,7 @@
                           <mat-label>Land Type</mat-label>
                           <mat-select
                             formControlName="landType"
+                            (selectionChange)="onLandTypeChanged($event)"
                             class="form-control">
                             <mat-option
                               *ngFor="let landType of landTypes"
@@ -235,7 +236,6 @@
                           <mat-label>GVDivision</mat-label>
                           <mat-select
                             formControlName="gvDivision"
-                            (selectionChange)="onGVDivisionChanged($event)"
                             class="form-control">
                             <mat-option
                               *ngFor="let gvDivision of gvDivisions"
