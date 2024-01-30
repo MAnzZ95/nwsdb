@@ -361,3 +361,21 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/.vs/Nwsdb.Web.Api/DesignTimeBuild/.dtbcache.v2
+/.vs/Nwsdb.Web.Api/v17/.suo
+/Core/Services/Nwsdb.Web.Api/obj/Debug/net6.0/Nwsdb.Web.Api.assets.cache
+/Core/Services/Nwsdb.Web.Api/obj/Debug/net6.0/Nwsdb.Web.Api.csproj.AssemblyReference.cache
+/Core/Services/Nwsdb.Web.Api/obj/Nwsdb.Web.Api.csproj.nuget.dgspec.json
+/Core/Services/Nwsdb.Web.Api/obj/project.assets.json
+/Core/Services/Nwsdb.Web.Api/obj/project.nuget.cache
+/Core/Tests/Nwsdb.Web.Api.Tests.Unit/obj/Debug/net6.0/Nwsdb.Web.Api.Tests.Unit.assets.cache
+/Core/Tests/Nwsdb.Web.Api.Tests.Unit/obj/Debug/net6.0/Nwsdb.Web.Api.Tests.Unit.csproj.AssemblyReference.cache
+/Core/Tests/Nwsdb.Web.Api.Tests.Unit/obj/Nwsdb.Web.Api.Tests.Unit.csproj.nuget.dgspec.json
+/Core/Tests/Nwsdb.Web.Api.Tests.Unit/obj/project.assets.json
+/Core/Tests/Nwsdb.Web.Api.Tests.Unit/obj/project.nuget.cache
+/Docs/Nwsdb.Docs/obj/Debug/net6.0/Nwsdb.Docs.assets.cache
+/Docs/Nwsdb.Docs/obj/Debug/net6.0/Nwsdb.Docs.csproj.AssemblyReference.cache
+/Docs/Nwsdb.Docs/obj/Nwsdb.Docs.csproj.nuget.dgspec.json
+/Docs/Nwsdb.Docs/obj/project.assets.json
+/Docs/Nwsdb.Docs/obj/project.nuget.cache
+/Web/package-lock.json
