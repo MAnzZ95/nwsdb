@@ -19,7 +19,9 @@ namespace Nwsdb.Web.Api.Brokers.Storages
             await InsertAsync(land);
 
         public IQueryable<Land> SelectAllLands() =>
-            this.Lands;
+            this.Lands.Include(l => l.WSS)
+                        .Include(l=> l.RSC)
+                            .Include(l=> l.Rmo);
 
         public async ValueTask<Land> UpdateLandAsync(Land land) =>
             await UpdateAsync(land);
