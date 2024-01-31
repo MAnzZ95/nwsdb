@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.scss']
 })
-export class ViewComponent {
+export class LegalIssueViewComponent {
 
 }

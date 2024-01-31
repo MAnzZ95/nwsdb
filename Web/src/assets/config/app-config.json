@@ -1,4 +1,4 @@
 {
-    "clientId":"web-client",
+    "clientId":"angular-client",
     "apiUrl":"https://localhost:7122"
 }

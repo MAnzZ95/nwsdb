@@ -1,1 +1,202 @@
-<p>new works!</p>
+<div class="col-12">
+    <form [formGroup]="inputForm" (ngSubmit)="saveWss()">
+        <mat-toolbar class="sub-header" style="margin-bottom: 5px;">
+            <div class="breadcrumb d-flex">
+              <span style="font-size: medium;">Users / </span>
+              <span style="font-size: medium;"> New</span>
+            </div>
+  
+            <div style="position: absolute; right: 20px;">
+              <app-switchbase
+                class="checkbox mt-3  mr-5"
+                switchbasecolor="worm"
+                switchbasestyle="swichbase-customize-Style"
+                (valueChange)="onActiveStatusChange($event)"
+                [labelValue]="'Active'"
+                [checked]="true" />
+              <app-button
+                buttonType="button"
+                [lableValue]="'Cancel'"
+                Iconcss="btn-view-icon material-icons-outlined"
+                Buttoncss="btn-view"
+                iconValue="cancel"
+                class="mr-4"
+                style="margin-right: 20px;"
+                (buttonClicked)="onCancel()" />
+              <app-button
+                [lableValue]="'Save'"
+                Iconcss="btn-save-icon material-icons-outlined"
+                Buttoncss="btn-save"
+                iconValue="save" />
+            </div>
+          </mat-toolbar>
+
+          <div style="margin-bottom: 5px;">
+            <div >
+              <div fxLayout="row">
+                <mat-accordion>
+                  <mat-expansion-panel
+                    (opened)="(true)"
+                    (closed)="(false)"
+                    [expanded]="true">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>{{
+                        'Basic Details'
+                      }}</mat-panel-title>
+                    </mat-expansion-panel-header>
+  
+                      <mat-grid-list rowHeight="75px" cols="12">
+                        <mat-grid-tile colspan="3">
+                          <mat-form-field class="form-control">
+                            <mat-label>{{
+                              'Name'
+                            }}</mat-label>
+                            <input
+                              type="text"
+                              id="name"
+                              class="form-control"
+                              matInput
+                              placeholder="CAMP-1234"
+                              formControlName="name" />
+                            <!-- <mat-error
+                              *ngIf="
+                                !inputForm.get('basicDetail.companyId')?.valid &&
+                                inputForm.get('basicDetail.companyId')?.touched
+                              ">
+                              {{ getCompanyIdErrorMessage() }}
+                            </mat-error> -->
+                          </mat-form-field>
+                        </mat-grid-tile>
+  
+                        <mat-grid-tile colspan="3">
+                          <mat-form-field class="form-control">
+                            <mat-label>{{
+                              'Email'
+                            }}</mat-label>
+                            <input
+                              type="text"
+                              id="email"
+                              class="form-control"
+                              matInput
+                              placeholder="test@email.com"
+                              formControlName="email" />
+                            <!-- <mat-error
+                              *ngIf="
+                                !inputForm.get('basicDetail.companyId')?.valid &&
+                                inputForm.get('basicDetail.companyId')?.touched
+                              ">
+                              {{ getCompanyIdErrorMessage() }}
+                            </mat-error> -->
+                          </mat-form-field>
+                        </mat-grid-tile>
+                        <mat-grid-tile colspan="3">
+                            <mat-form-field class="form-control">
+                              <mat-label>{{ 'Password' }}</mat-label>
+                              <input
+                                type="password"
+                                id="password"
+                                class="form-control"
+                                matInput
+                                placeholder="Password"
+                                formControlName="password"
+                              />
+                              <!-- Add any validation or error handling if needed -->
+                            </mat-form-field>
+                          </mat-grid-tile>
+                          
+  
+                        <mat-grid-tile colspan="3">
+                          <mat-form-field class="form-control">
+                            <mat-label>{{
+                              'Phone'
+                            }}</mat-label>
+                            <input
+                              type="text"
+                              id="phone"
+                              class="form-control"
+                              matInput
+                              placeholder="+943232535"
+                              formControlName="phone" />
+                            <!-- <mat-error
+                              *ngIf="
+                                !inputForm.get('basicDetail.companyId')?.valid &&
+                                inputForm.get('basicDetail.companyId')?.touched
+                              ">
+                              {{ getCompanyIdErrorMessage() }}
+                            </mat-error> -->
+                          </mat-form-field>
+                        </mat-grid-tile>
+                      </mat-grid-list>
+
+                      <mat-grid-list rowHeight="75px" cols="3">
+                        <mat-grid-tile>
+                          <mat-form-field class="form-control">
+                            <mat-label>{{
+                              'Gender'
+                            }}</mat-label>
+                            <input
+                              type="text"
+                              id="gender"
+                              class="form-control"
+                              matInput
+                              placeholder="Gender"
+                              formControlName="gender" />
+                            <!-- <mat-error
+                              *ngIf="
+                                !inputForm.get('basicDetail.companyId')?.valid &&
+                                inputForm.get('basicDetail.companyId')?.touched
+                              ">
+                              {{ getCompanyIdErrorMessage() }}
+                            </mat-error> -->
+                          </mat-form-field>
+                        </mat-grid-tile>
+                        
+                        <mat-grid-tile>
+                            <mat-form-field
+                              class="form-control">
+                              <mat-label>Position</mat-label>
+                              <mat-select
+                                formControlName="position"
+                                class="form-control">
+                                <mat-option
+                                  *ngFor="let pos of positions"
+                                  [value]="pos.id">
+                                  {{ pos.name }}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                      </mat-grid-list>
+  
+                      <mat-grid-list rowHeight="75px" cols="1">
+                        <mat-grid-tile>
+                          <mat-form-field class="form-control">
+                            <mat-label>{{
+                              'Address'
+                            }}</mat-label>
+                            <input
+                              type="text"
+                              id="address"
+                              class="form-control"
+                              matInput
+                              placeholder="address"
+                              formControlName="address" />
+                            <!-- <mat-error
+                              *ngIf="
+                                !inputForm.get('basicDetail.companyId')?.valid &&
+                                inputForm.get('basicDetail.companyId')?.touched
+                              ">
+                              {{ getCompanyIdErrorMessage() }}
+                            </mat-error> -->
+                          </mat-form-field>
+                        </mat-grid-tile>
+                      </mat-grid-list>
+                      
+  
+                  </mat-expansion-panel>
+                </mat-accordion>
+              </div>
+            </div>
+          </div>
+    </form>
+</div>

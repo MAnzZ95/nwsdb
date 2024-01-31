@@ -112,6 +112,6 @@ export class WssNewComponent {
   }
 
   onCancel(): void {
-    this.router.navigate([`/land`], {});
+    this.router.navigate([`/wss`], {});
   }
 }

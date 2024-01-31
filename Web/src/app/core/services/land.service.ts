@@ -18,10 +18,20 @@ export class LandService {
     return this.httpClient.get<Land>(`${this.apiUrl}`);
   }
 
+  getLegalIssueDetails():Observable<Land>{
+    return this.httpClient.get<Land>(`${this.apiUrl}/isLegal`)
+  }
+
   getLandDetailsWithOData(
     ODataQueryParams: HttpParams
   ):Observable<Land[]>{
     return this.httpClient.get<Land[]>(`${this.apiUrl}`,{params: ODataQueryParams});
+  }
+
+  getLegalDetailsWithOData(
+    ODataQueryParams: HttpParams
+  ):Observable<Land[]>{
+    return this.httpClient.get<Land[]>(`${this.apiUrl}/isLegal`,{params: ODataQueryParams});
   }
 
   getLandDetailsById(landId: string): Observable<Land>{
@@ -38,8 +48,11 @@ export class LandService {
   }
 
   getLandsCount(): Observable<number>{
-    console.log(this.apiUrl);
     return this.httpClient.get<number>(`${this.apiUrl}/count`);
+  }
+
+  getLegalCount(): Observable<number>{
+    return this.httpClient.get<number>(`${this.apiUrl}/isLegalCount`);
   }
 
   removeLand(landId: string): Observable<Land> {

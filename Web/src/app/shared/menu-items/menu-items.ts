@@ -11,7 +11,7 @@ export interface Menu {
 const MENUITEMS = [
   { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer' },
   { state: 'land', type: 'link', name: 'Lands', icon: 'crop_7_5' },
-  // { state: 'legal-issue', type: 'link', name: 'Legal Issues', icon: 'announcement' },
+  { state: 'legal-issue', type: 'link', name: 'Legal Issues', icon: 'announcement' },
   { state: 'rsc', type: 'link', name: 'RS Center', icon: 'view_comfy' },
   { state: 'rmo', type: 'link', name: 'RM Office', icon: 'view_list' },
   { state: 'wss', type: 'link', name: 'WS Schemes', icon: 'view_headline' },
