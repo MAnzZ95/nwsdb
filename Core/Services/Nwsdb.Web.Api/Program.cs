@@ -1,5 +1,8 @@
 using FluentAssertions.Common;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.OData;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Nwsdb.Web.Api.Brokers.DateTimes;
 using Nwsdb.Web.Api.Brokers.Loggings;
@@ -20,9 +23,29 @@ using Nwsdb.Web.Api.Services.Foundations.Wsses;
 
 var builder = WebApplication.CreateBuilder(args);
 
+ConfigurationManager configuration = builder.Configuration;
+
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDbContext<StorageBroker>();
 builder.Services.AddHttpClient();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.Authority = configuration["Keycloak:Authority"];
+    options.Audience = configuration["Keycloak:Audience"];
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidIssuer = configuration["Keycloak:Authority"],
+        ValidAudience = configuration["Keycloak:Audience"]
+    };
+});
 
 builder.Services.AddTransient<IStorageBroker, StorageBroker>();
 builder.Services.AddTransient<ILoggingBroker, LoggingBroker>();
@@ -41,6 +64,13 @@ builder.Services.AddTransient<IOwnerShipService, OwnerShipService>();
 builder.Services.AddTransient<IUserTypeService,UserTypeService>();
 builder.Services.AddTransient<ILandTypeService, LandTypeService>();
 builder.Services.AddTransient<ILandSubCategoryService, LandSubCategoryService>();
+
+builder.Services.AddControllers().AddOData(opt =>
+    opt.Select()
+        .Filter()
+        .OrderBy()
+        .SetMaxTop(null)
+        .Count());
 
 builder.Services.AddCors(options =>
 {
