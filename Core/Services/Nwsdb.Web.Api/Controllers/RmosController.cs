@@ -18,6 +18,7 @@ using Nwsdb.Web.Api.Models.Lands.Exceptions;
 using Nwsdb.Web.Api.Services.Foundations.Lands;
 using Nwsdb.Web.Api.Models.WSSs;
 using Nwsdb.Web.Api.Models.RSCs;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace Nwsdb.Web.Api.Controllers
 {
@@ -33,6 +34,7 @@ namespace Nwsdb.Web.Api.Controllers
         }
 
         [HttpGet]
+        [EnableQuery]
         public async ValueTask<ActionResult<IQueryable<Rmo>>> GetAllRmos()
         {
             try

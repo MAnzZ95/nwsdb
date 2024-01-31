@@ -10,6 +10,7 @@ using RESTFulSense.Controllers;
 using Nwsdb.Web.Api.Services.Foundations.DSDivisions;
 using Nwsdb.Web.Api.Models.DSDevisions;
 using Nwsdb.Web.Api.Models.DSDivisions.Exceptions;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace Nwsdb.Web.Api.Controllers
 {
@@ -25,6 +26,7 @@ namespace Nwsdb.Web.Api.Controllers
         }
 
         [HttpGet]
+        [EnableQuery]
         public async ValueTask<ActionResult<IQueryable<DSDivision>>> GetAllDSDivisions()
         {
             try

@@ -13,6 +13,7 @@ using Nwsdb.Web.Api.Services.Foundations.Lands;
 using Nwsdb.Web.Api.Services.Foundations.LandSubCategories;
 using RESTFulSense.Controllers;
 using Nwsdb.Web.Api.Models.LandSubCategories;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace Nwsdb.Web.Api.Controllers
 {
@@ -28,6 +29,7 @@ namespace Nwsdb.Web.Api.Controllers
         }
 
         [HttpGet]
+        [EnableQuery]
         public async ValueTask<ActionResult<IQueryable<LandSubCategory>>> GetAllLandSubCategories()
         {
             try

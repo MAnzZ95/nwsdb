@@ -379,3 +379,4 @@ FodyWeavers.xsd
 /Docs/Nwsdb.Docs/obj/project.assets.json
 /Docs/Nwsdb.Docs/obj/project.nuget.cache
 /Web/package-lock.json
+/Core/Services/Nwsdb.Web.Api/.config/dotnet-tools.json
