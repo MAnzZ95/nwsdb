@@ -10,6 +10,7 @@ import { RscComponent } from "./rsc.component";
 import { routes } from "./rsc.routing";
 import { RscDetailsComponent } from "./details/details.component";
 import { RscViewComponent } from "./details/view/view.component";
+import { RscEditComponent } from "./details/edit/edit.component";
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import { RscViewComponent } from "./details/view/view.component";
      RscComponent,
      RscNewComponent,
      RscDetailsComponent,
-     RscViewComponent
+     RscViewComponent,
+     RscEditComponent
     ],
     imports: [
       RouterModule.forChild(routes),

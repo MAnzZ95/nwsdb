@@ -27,7 +27,7 @@ namespace Nwsdb.Web.Api.Controllers
 
 
         [HttpPost]
-        public async ValueTask<ActionResult<UserType>> PostUserAsync(UserType userType)
+        public async ValueTask<ActionResult<UserType>> PostUserTypeAsync(UserType userType)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace Nwsdb.Web.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async ValueTask<ActionResult<UserType>> GetLandById(Guid id)
+        public async ValueTask<ActionResult<UserType>> GetUserTypeById(Guid id)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace Nwsdb.Web.Api.Controllers
         }
 
         [HttpGet]
-        public async ValueTask<ActionResult<IQueryable<UserType>>> GetAllUsers()
+        public async ValueTask<ActionResult<IQueryable<UserType>>> GetAllUserTypes()
         {
             try
             {

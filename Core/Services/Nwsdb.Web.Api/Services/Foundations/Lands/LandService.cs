@@ -48,6 +48,9 @@ namespace Nwsdb.Web.Api.Services.Foundations.Lands
             TryCatch(() =>
                 this.storageBroker.SelectAllLands());
 
+        public IQueryable<Land> RetrieveAllLegalLands() =>
+            TryCatch(() => this.storageBroker.SelectAllLands().Where(land => land.IsLegal == true));
+
         public ValueTask<Land> RetrieveLandById(Guid id) =>
             TryCatch(async () =>
             {

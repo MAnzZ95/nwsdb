@@ -10,6 +10,7 @@ using RESTFulSense.Controllers;
 using Nwsdb.Web.Api.Services.Foundations.Lands;
 using Nwsdb.Web.Api.Models.Lands;
 using Nwsdb.Web.Api.Models.Lands.Exceptions;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace Nwsdb.Web.Api.Controllers
 {
@@ -25,7 +26,7 @@ namespace Nwsdb.Web.Api.Controllers
         }
 
         [HttpPost]
-        public async ValueTask<ActionResult<Land>> PostUserAsync(Land land)
+        public async ValueTask<ActionResult<Land>> PostLandAsync(Land land)
         {
             try
             {
@@ -72,6 +73,7 @@ namespace Nwsdb.Web.Api.Controllers
         }
 
         [HttpGet]
+        [EnableQuery]
         public async ValueTask<ActionResult<IQueryable<Land>>> GetAllLands()
         {
             try
@@ -85,6 +87,45 @@ namespace Nwsdb.Web.Api.Controllers
                 return InternalServerError(landDependencyException);
             }
             catch(LandServiceException landServiceException)
+            {
+                return InternalServerError(landServiceException);
+            }
+        }
+
+        [HttpGet("isLegal")]
+        [EnableQuery]
+        public async ValueTask<ActionResult<IQueryable<Land>>> GetAllLegalIssues()
+        {
+            try
+            {
+                IQueryable<Land> storageLands =
+                    this.landService.RetrieveAllLegalLands();
+                return Ok(storageLands);
+            }
+            catch (LandDependencyException landDependencyException)
+            {
+                return InternalServerError(landDependencyException);
+            }
+            catch (LandServiceException landServiceException)
+            {
+                return InternalServerError(landServiceException);
+            }
+        }
+
+        [HttpGet("isLegalCount")]
+        public ActionResult GetLegalIssuesCount()
+        {
+            try
+            {
+                int storageLandCount =
+                    this.landService.RetrieveAllLegalLands().Count();
+                return Ok(storageLandCount);
+            }
+            catch (LandDependencyException landDependencyException)
+            {
+                return InternalServerError(landDependencyException);
+            }
+            catch (LandServiceException landServiceException)
             {
                 return InternalServerError(landServiceException);
             }

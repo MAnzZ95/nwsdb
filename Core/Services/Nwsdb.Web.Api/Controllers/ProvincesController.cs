@@ -14,6 +14,7 @@ using RESTFulSense.Controllers;
 using Nwsdb.Web.Api.Services.Foundations.Provinces;
 using Nwsdb.Web.Api.Models.Provinces;
 using Nwsdb.Web.Api.Models.Provinces.Exceptions;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace Nwsdb.Web.Api.Controllers
 {
@@ -29,6 +30,7 @@ namespace Nwsdb.Web.Api.Controllers
         }
 
         [HttpGet]
+        [EnableQuery]
         public async ValueTask<ActionResult<IQueryable<Province>>> GetAllOwnerShips()
         {
             try

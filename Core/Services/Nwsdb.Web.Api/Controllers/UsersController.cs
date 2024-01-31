@@ -7,6 +7,7 @@
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using Nwsdb.Web.Api.Models.RMOs.Exceptions;
 using Nwsdb.Web.Api.Models.Users;
 using Nwsdb.Web.Api.Models.Users.Exceptions;
@@ -74,6 +75,7 @@ namespace Nwsdb.Web.Api.Controllers
         }
 
         [HttpGet]
+        [EnableQuery]  
         public async ValueTask<ActionResult<IQueryable<User>>> GetAllUsers()
         {
             try

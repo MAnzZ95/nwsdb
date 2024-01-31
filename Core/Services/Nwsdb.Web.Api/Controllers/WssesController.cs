@@ -18,6 +18,7 @@ using Nwsdb.Web.Api.Models.Users.Exceptions;
 using Nwsdb.Web.Api.Services.Foundations.Users;
 using Nwsdb.Web.Api.Models.RMOs.Exceptions;
 using Nwsdb.Web.Api.Models.RMOs;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace Nwsdb.Web.Api.Controllers
 {
@@ -33,6 +34,7 @@ namespace Nwsdb.Web.Api.Controllers
         }
 
         [HttpGet]
+        [EnableQuery]
         public async ValueTask<ActionResult<IQueryable<Wss>>> GetAllWsses()
         {
             try
@@ -89,7 +91,7 @@ namespace Nwsdb.Web.Api.Controllers
             }
         }
 
-        [HttpGet("{rmoId}")]
+        [HttpGet("rmo/{rmoId}")]
         public async ValueTask<ActionResult<IQueryable<Wss>>> GetAllWssesByRmoId(Guid rmoId)
         {
             try

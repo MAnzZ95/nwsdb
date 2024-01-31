@@ -44,6 +44,6 @@ export class WssService {
   }
 
   getWssDetailsByRmoId(rmoId: string): Observable<Wss[]>{
-    return this.httpClient.get<Wss[]>(`${this.apiUrl}/${rmoId}`);
+    return this.httpClient.get<Wss[]>(`${this.apiUrl}/rmo/${rmoId}`);
   }
 }

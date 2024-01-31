@@ -15,5 +15,6 @@ namespace Nwsdb.Web.Api.Services.Foundations.Lands
         IQueryable<Land> RetrieveAllLands();
         ValueTask<Land> RetrieveLandById(Guid id);
         ValueTask<Land> ModifyLandAsync(Land land);
+        IQueryable<Land> RetrieveAllLegalLands();
     }
 }

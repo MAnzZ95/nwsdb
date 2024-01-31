@@ -7,6 +7,7 @@
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using Nwsdb.Web.Api.Models.DSDevisions;
 using Nwsdb.Web.Api.Models.GSDivisions;
 using Nwsdb.Web.Api.Models.GSDivisions.Exceptions;
@@ -29,6 +30,7 @@ namespace Nwsdb.Web.Api.Controllers
         }
 
         [HttpGet]
+        [EnableQuery]
         public async ValueTask<ActionResult<IQueryable<GSDivision>>> GetAllGSDivisions()
         {
             try

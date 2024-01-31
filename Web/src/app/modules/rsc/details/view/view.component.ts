@@ -25,7 +25,7 @@ export class RscViewComponent {
   }
 
   onCancel(): void {
-    this.router.navigate([`/land`], {});
+    this.router.navigate([`/rsc`], {});
   }
 
   getStatusClass(status: number): string {

@@ -37,7 +37,7 @@ import { AuthGuard } from './core/utils/app.guard';
             provide: APP_INITIALIZER,
             useFactory:initializeApp,
             multi:true,
-            deps:[HttpClient,AppConfigService]
+            deps:[HttpClient,KeycloakService,AppConfigService]
         }
     ],    
     exports: [RouterModule],
